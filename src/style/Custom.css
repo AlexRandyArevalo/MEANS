@@ -1,0 +1,152 @@
+/* ---------------------------------------------------
+    HEADER
+----------------------------------------------------- */
+.means-header {
+  background-color: #9500f3;
+  color: #ffffff;
+}
+
+/* ---------------------------------------------------
+    TITLE
+----------------------------------------------------- */
+.mean-title {
+  color: #9500f3;
+}
+
+/* ---------------------------------------------------
+    MENUBAR
+----------------------------------------------------- */
+.means-menubar {
+  color: #ffffff;
+  height: calc(100vh - 96px);
+  min-height: 50vh;
+  overflow-y: auto;
+}
+
+/* ---------------------------------------------------
+    BODY
+----------------------------------------------------- */
+.means-body {
+  height: calc(100vh - 96px);
+  min-height: 50vh;
+  overflow-y: auto;
+}
+
+/* ---------------------------------------------------
+    CONTAINER
+----------------------------------------------------- */
+.Login {
+  text-align: center;
+  background-color: #9500f3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #333333;
+}
+
+.acn-logo {
+  height: 2rem;
+  float: left;
+  filter: invert(63%) sepia(83%) saturate(452%) hue-rotate(218deg) brightness(79%) contrast(346%);
+}
+
+/* ---------------------------------------------------
+    BUTTON STYLE
+----------------------------------------------------- */
+.btn {
+  border-width: 2px;
+  font-weight: 400;
+  font-size: 0.5em;
+  line-height: 1.35em;
+  margin: 10px 1px;
+  border: none;
+  border-radius: 0% !important;
+  padding: 11px 22px;
+  cursor: pointer;
+  background-color: #9500f3;
+  color: #FFFFFF;
+  min-width: 20% !important;
+  width: 100% !important;
+}
+.btn:active {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: 0 !important;
+}
+.btn-purple {
+  background-color: #9500f3 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-purple:hover {
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.17);
+  background-color: #8003d0 !important;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.my-link,
+.my-link:hover,
+.my-link:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li .my-link {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li .my-link:hover {
+    color: #333333;
+    background: #fff;
+}
+
+/* ---------------------------------------------------
+    CARD
+----------------------------------------------------- */
+.means-card-total {
+  color: #9500f3;
+  font-size: 24px;
+  font-weight: 700;
+  margin: auto;
+}
+
+.means-card-title {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 700;
+  margin: auto;
+}
+
+hr.vertical {
+  height:100px; /* you might need some positioning for this to work, see other questions about 100% height */
+  width:1;
+  border:1px solid #ccc;
+}
