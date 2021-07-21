@@ -23,6 +23,9 @@ function AddRiskAssessments() {
                             <div className="p-3">
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Description"></textarea>
                             </div>
+                            <div className="p-3 fs-3 align-self-center col-2">
+                                <button type="button" className="btn btn-purple">Submit</button>
+                            </div>
                         </div>
 
                         <div className="shadow-sm p-3 mb-5 bg-body rounded">
