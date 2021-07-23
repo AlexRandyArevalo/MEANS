@@ -30,7 +30,7 @@ function EmployeeMaintenance() {
                                     <input style={{ width: "30%" }} type="email" className="form-control" id="exampleFormControlInput1" placeholder="Search..." />
                                 </div>
                                 <div className="pt-3 pb-3 fs-3 float-right col-2">
-                                    <Link style={{ width: "50% !important" }} type="button" className="btn btn-purple" to="/addriskassessments"><FontAwesomeIcon icon="user-plus" /> &nbsp;Add</Link>
+                                    <Link style={{ width: "50% !important" }} type="button" className="btn btn-purple"><FontAwesomeIcon icon="user-plus" /> &nbsp;Add</Link>
                                 </div>
                             </div>
 

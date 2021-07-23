@@ -1,11 +1,38 @@
 import React, { useState } from "react";
-
 import Header from './Header';
 import Menubar from './Menubar';
-import { Link } from 'react-router-dom'
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import { Line } from "react-chartjs-2";
 
 function StatisticReports() {
-    const [startDate, setStartDate] = useState(new Date());
+    const [dateSelected, onChange] = useState([new Date(), new Date()]);
+
+    const data = {
+        labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+        datasets: [
+            {
+
+                label: "First dataset",
+                data: [33, 53, 85, 41, 44, 65, 41, 44, 65],
+                fill: true,
+                backgroundColor: "#9b03fb78",
+                borderColor: "#9500f3"
+            },
+            {
+                label: "Second dataset",
+                data: [33, 25, 35, 51, 54, 76, 41, 44, 69],
+                fill: true,
+                backgroundColor: "#9b03fb78",
+                borderColor: "#9500f3"
+            }
+        ]
+    };
+
+    const handleValidate = (e) => {
+        e.preventDefault()
+        console.log(dateSelected);
+    }
+
     return (<div>
         <Header />
         <div className="d-flex">
@@ -14,15 +41,33 @@ function StatisticReports() {
                 <h4 className="ps-5 pt-4 pb-2 mean-title">Statistic and Reports</h4>
                 <hr />
                 <div className="container">
-
-                    
-
-                    <div className="d-flex mt-4">
-
+                    <div class="shadow-sm p-3 mb-3 bg-body rounded mt-4">
+                        <form onSubmit={handleValidate}>
+                            <div className="d-flex ps-3">
+                                <div className="align-self-center">
+                                    <DateRangePicker
+                                        onChange={onChange}
+                                        value={dateSelected}
+                                    />
+                                </div>
+                                <div className="align-self-center ps-3">
+                                    <button type="submit" className="btn btn-purple">Submit</button>
+                                </div>
+                            </div>
+                            <div className="d-flex mt-4">
+                                <div className="col">
+                                    <Line data={data} />
+                                </div>
+                                <div>&nbsp;</div>
+                                <div className="col">
+                                    <Line data={data} />
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     {/* TABLE */}
-                    {/* <div class="shadow-sm p-3 mb-5 bg-body rounded">
+                    <div class="shadow-sm p-3 mb-5 bg-body rounded">
                         <h5 className="pb-3">List of Employees at Risk</h5>
                         <table class="table">
                             <thead>
@@ -54,7 +99,7 @@ function StatisticReports() {
                                 </tr>
                             </tbody>
                         </table>
-                    </div> */}
+                    </div>
 
                 </div>
             </div>

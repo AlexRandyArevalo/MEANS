@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from './Header';
 import Menubar from './Menubar';
-import { Link } from 'react-router-dom'
 
 function RiskLevelManagement() {
     return (<div>
