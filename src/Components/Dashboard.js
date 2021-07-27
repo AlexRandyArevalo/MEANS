@@ -46,9 +46,9 @@ function Dashboard() {
                     </div>
                     
                     {/* TABLE */}
-                    <div class="shadow-sm p-3 mb-5 bg-body rounded">
+                    <div className="shadow-sm p-3 mb-5 bg-body rounded">
                         <h5 className="pb-3">Risk Assessments</h5>
-                        <table class="table">
+                        <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

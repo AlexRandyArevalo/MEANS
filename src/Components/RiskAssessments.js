@@ -3,6 +3,7 @@ import Header from './Header';
 import Menubar from './Menubar';
 import { Link } from 'react-router-dom'
 
+
 function RiskAssessments() {
     return (<div>
         <Header />
@@ -17,14 +18,14 @@ function RiskAssessments() {
                             <input style={{ width: "30%" }} type="email" className="form-control" id="exampleFormControlInput1" placeholder="Search..." />
                         </div>
                         <div className="pt-3 pb-3 fs-3 float-right col-2">
-                            <Link style={{ width: "50% !important" }} type="button" className="btn btn-purple" to="/addriskassessments">Add Risk Assessment</Link>
+                            <Link type="button" className="btn_ btn-purple" to="/addriskassessments">Add Risk Assessment</Link>
                         </div>
                     </div>
 
                     {/* TABLE */}
-                    <div class="shadow-sm p-3 mb-5 bg-body rounded">
+                    <div className="shadow-sm p-3 mb-5 bg-body rounded">
                     <h5 className="pb-3">Risk Assessments</h5>
-                        <table class="table">
+                        <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
