@@ -13,30 +13,38 @@ function Dashboard() {
                 <div className="container">
 
                     {/* CARDS */}
-                    <div className="d-flex mt-4" style={{ border: "solid 0px", justifyContent: "center" }}>
-                        <div className="shadow p-3 mb-5 bg-body rounded mt-2 me-5 col">
-                            <div className="card-body d-flex">
-                                <div className="means-card-total p-4">100</div>
-                                <hr className="vertical" />
-                                <div className="means-card-title p-2">Risk Assessments</div>
+                    <div className="row">
+                        <div className="d-flex mt-4 col-md-12 mean-card-main">
+                            <div className="col-md-4 means-card">
+                                <div className="shadow-sm m-3 mb-5 bg-body rounded">
+                                    <div className="card-body d-flex">
+                                        <div className="means-card-total p-2">100</div>
+                                        <hr className="vertical" />
+                                        <div className="means-card-title p-2">Risk <br />Assessments</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="shadow p-3 mb-5 bg-body rounded mt-2 me-5 col">
-                            <div className="card-body d-flex">
-                                <div className="means-card-total p-4">200</div>
-                                <hr className="vertical" />
-                                <div className="means-card-title p-2">Employees</div>
+                            <div className="col-md-4 means-card">
+                                <div className="shadow-sm m-3 mb-5 bg-body rounded">
+                                    <div className="card-body d-flex">
+                                        <div className="means-card-total p-2">200</div>
+                                        <hr className="vertical" />
+                                        <div className="means-card-title p-2">Employees</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="shadow p-3 mb-5 bg-body rounded mt-2 col">
-                            <div className="card-body d-flex">
-                                <div className="means-card-total p-4">300</div>
-                                <hr className="vertical" />
-                                <div className="means-card-title p-2">Employees Reponses</div>
+                            <div className="col-md-4 means-card">
+                                <div className="shadow-sm m-3 mb-5 bg-body rounded">
+                                    <div className="card-body d-flex">
+                                        <div className="means-card-total p-2">300</div>
+                                        <hr className="vertical" />
+                                        <div className="means-card-title p-2">Employees <br />Reponses</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
+                    
                     {/* TABLE */}
                     <div class="shadow-sm p-3 mb-5 bg-body rounded">
                         <h5 className="pb-3">Risk Assessments</h5>
@@ -76,7 +84,7 @@ function Dashboard() {
             </div>
         </div>
 
-    </div>)
+    </div >)
 }
 
 export default Dashboard;
