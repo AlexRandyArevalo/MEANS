@@ -1,10 +1,66 @@
 /* ---------------------------------------------------
+    FONT
+----------------------------------------------------- */
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+/* ---------------------------------------------------
     HEADER
 ----------------------------------------------------- */
-.means-header {
-  background-color: #9500f3;
+.nav-link,
+.means-header  {
+  background-color: #9500f3 !important;
   color: #ffffff;
+  text-indent: 27px;
+  margin-bottom: 0 !important;
 }
+.nav-link:focus,
+.nav-link:hover  {
+  background-color: #9500f3 !important;
+  color: #ffffff;
+  text-indent: 27px;
+  margin-bottom: 0 !important;
+}
+
+.user-img {
+  justify-content: flex-end;
+  padding-right: 5% !important;
+}
+.user-img a { 
+  border: solid 1px #666; 
+  width: 5%;
+  max-width: 15%;
+  min-width: 40px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
+}
+.user-img img { 
+  border: solid 2px #666; 
+  width: 5%;
+  max-width: 15%;
+  min-width: 40px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
+}
+.user-img .nav-link {
+  width: 5vw;
+  display: flex;
+  white-space: nowrap;
+  padding-left: 22px;
+}
+.vLine {
+  border: solid 1px #777;
+  width: 1px;
+  height: 40px;
+  position: absolute;
+  margin-left: 10px;
+}
+
 
 /* ---------------------------------------------------
     TITLE
@@ -56,10 +112,10 @@
 /* ---------------------------------------------------
     BUTTON STYLE
 ----------------------------------------------------- */
-.btn {
+.btn_ {
   border-width: 2px;
   font-weight: 400;
-  font-size: 0.5em;
+  font-size: 14px;
   line-height: 1.35em;
   margin: 10px 1px;
   border: none;
@@ -70,8 +126,11 @@
   color: #FFFFFF;
   min-width: 20% !important;
   width: 100% !important;
+  min-width: 150px !important;
+  text-decoration: none;
+  text-align: center;
 }
-.btn:active {
+.btn_:active {
   -webkit-box-shadow: none;
   box-shadow: none;
   outline: 0 !important;
@@ -80,7 +139,6 @@
   background-color: #9500f3 !important;
   color: #FFFFFF !important;
 }
-
 .btn-purple:hover {
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.17);
   background-color: #8003d0 !important;
@@ -131,20 +189,21 @@
 /* ---------------------------------------------------
     CARD
 ----------------------------------------------------- */
+.means-card .rounded {
+  min-width: 220px;
+}
 .means-card-total {
   color: #9500f3;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 700;
   margin: auto;
 }
-
 .means-card-title {
   color: #333333;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 700;
   margin: auto;
 }
-
 hr.vertical {
   height:100px; /* you might need some positioning for this to work, see other questions about 100% height */
   width:1;

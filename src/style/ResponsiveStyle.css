@@ -1,0 +1,27 @@
+@media only screen and (max-width: 986px) {
+    .means-user .nav-item {
+        text-align: center !important;
+        padding-left: 10% !important;
+        display: inline-block;
+    }
+    .means-user .last-child {
+        display: inline-block !important;
+    }
+    .means-user .last-child .vLine {
+        display: none;
+    }
+    
+}
+@media only screen and (max-width: 958px) {
+    .means-card {
+        width: 100% !important
+              
+    }
+    .mean-card-main {
+        width: 100% !important;
+        flex-direction: column !important;
+    }
+    .means-body {
+        width: calc(100vw - 230px);
+    }
+}
