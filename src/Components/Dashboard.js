@@ -8,7 +8,7 @@ function Dashboard() {
         <div className="d-flex">
             <Menubar />
             <div className="means-body col-md-9 bg-light">
-                <h4 className="ps-5 pt-4 pb-2 mean-title">Dashboard</h4>
+                <h4 className="ps-3 pt-4 pb-2 mean-title">Dashboard</h4>
                 <hr />
                 <div className="container">
 
@@ -43,41 +43,44 @@ function Dashboard() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    {/* TABLE */}
-                    <div className="shadow-sm p-3 mb-5 bg-body rounded">
-                        <h5 className="pb-3">Risk Assessments</h5>
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+
+                        {/* TABLE */}
+                        <div className="col-md-12">
+                            <div className="shadow-sm p-3 mb-5 bg-body rounded">
+                                <h5 className="pb-3">Risk Assessments</h5>
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

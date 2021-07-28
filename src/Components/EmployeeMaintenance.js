@@ -60,80 +60,89 @@ function EmployeeMaintenance() {
         <div className="d-flex">
             <Menubar />
             <div className="means-body col-md-9 bg-light">
-                <h4 className="ps-5 pt-4 pb-2 mean-title">Employee Maintenance</h4>
+                <h4 className="ps-3 pt-4 pb-2 mean-title">Employee Maintenance</h4>
                 <hr />
                 <div className="container">
-                    <div className="d-flex mt-4">
-                        <div className="col-md-3 m-2 shadow-sm p-3 mb-5 bg-body rounded" style={{ maxHeight: "400px" }}>
-                            <CSVReader
-                                className="mt-3"
-                                cssClassName="csv-reader-input form-control"
-                                label="File Upload"
-                                cssLabelClass="fs-5 pb-3"
-                                onFileLoaded={handleData}
-                                onError={onError}
-                                parserOptions={parseOptions}
-                                inputId="Alex"
-                                inputName="Arev"
-                                inputStyle={{
-                                    color: '#444',
-                                    border: "solid 1px #ccc",
-                                    borderRadius: "4px",
-                                    lineHeight: "29px",
-                                    width: "calc(15.2vw)"
-                                }}
-                                // strict
-                            />
-                            <br />
-                            <br />
-                            <button type="button" className="btn_ btn-purple">Submit</button>
-                        </div>
-                        <div className="col-md-9 m-2">
-                            <div className="d-flex mb-3">
-                                <div className="pt-3 pb-3 align-self-center col-10">
-                                    <input style={{ width: "30%" }} type="email" className="form-control" id="exampleFormControlInput1" placeholder="Search..." />
-                                </div>
-                                <div className="pt-3 pb-3 fs-3 float-right col-2">
-                                    <button style={{ width: "50% !important" }} type="button" className="btn_ btn-purple" onClick={showModal}><FontAwesomeIcon icon="user-plus" /> &nbsp;Add</button>
-                                </div>
+                    <div className="col-md-12 d-flex mt-4 emp-main">
+                        <div className="col-md-3 upload-employees">
+                            <div className="shadow-sm p-4 mb-5 bg-body rounded h-75">
+                                <CSVReader
+                                    className=""
+                                    cssClassName="csv-reader-input form-control"
+                                    label="File Upload"
+                                    cssLabelClass="fs-5 pb-3"
+                                    onFileLoaded={handleData}
+                                    onError={onError}
+                                    parserOptions={parseOptions}
+                                    inputId="Alex"
+                                    inputName="Arev"
+                                    inputStyle={{
+                                        color: '#444',
+                                        border: "solid 1px #ccc",
+                                        borderRadius: "4px",
+                                        lineHeight: "29px",
+                                        width: "100%"
+                                    }}
+                                />
+                                <br />
+                                <br />
+                                <button type="button" className="btn_ btn-purple w-100">Submit</button>
                             </div>
+                        </div>
+                        <div className="col-md-9 employee-list">
+                            <div className="p-3">
+                                <div className="col-md-12 d-flex">
+                                    <div className="col align-self-center w-100">
+                                        <div className="form-group">
+                                            <div className="icon-addon addon-md">
+                                                <input type="text" placeholder="Search" className="form-control w-50 search" />
+                                                <label htmlFor="Search" className="glyphicon glyphicon-search" rel="tooltip" title="Search"><FontAwesomeIcon icon="search" /></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col" style={{ textAlign: "end" }}>
+                                        <button type="button" className="btn_ btn-purple w-25" onClick={showModal}><FontAwesomeIcon icon="user-plus" /> &nbsp;Add</button>
+                                    </div>
+                                </div>
 
-                            {/* TABLE */}
-                            <div className="shadow-sm p-3 mb-5 bg-body rounded mt-3">
-                                <h5 className="pb-3">Employee List</h5>
-                                <table className="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                {/* TABLE */}
+                                <div className="shadow-sm p-3 mb-5 bg-body rounded mt-3">
+                                    <h5 className="pb-3">Employee List</h5>
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">First</th>
+                                                <th scope="col">Last</th>
+                                                <th scope="col">Handle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <Modal show={isOpen} onHide={hideModal} size="lg">
                     <Modal.Header>

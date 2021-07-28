@@ -26,7 +26,7 @@ function UserMaintenance() {
         <div className="d-flex">
             <Menubar />
             <div className="means-body col-md-9 bg-light">
-                <h4 className="ps-5 pt-4 pb-2 mean-title">User Maintenance</h4>
+                <h4 className="ps-3 pt-4 pb-2 mean-title">User Maintenance</h4>
                 <hr />
                 <div className="container">
                     <div className="shadow-sm p-3 mb-5 bg-body rounded mt-4">
@@ -57,8 +57,8 @@ function UserMaintenance() {
                                 <div className="col-md-12 mt-4">
                                     <input onChange={(e) => setAddr2(e.target.value)} value={addr2} type="text" className="form-control" placeholder="Address Line 2" />
                                 </div>
-                                <div className="col-md-12 pt-3">
-                                    <button style={{ maxWidth: "20%", float: "right" }} type="submit" className="btn_ btn-purple pt-3">Submit</button>
+                                <div className="col-md-12 pt-3" style={{ textAlign: "end" }}>
+                                    <button type="submit" className="btn_ btn-purple">Submit</button>
                                 </div>
                             </div>
                         </form>

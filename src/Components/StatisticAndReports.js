@@ -38,7 +38,7 @@ function StatisticReports() {
         <div className="d-flex">
             <Menubar />
             <div className="means-body col-md-9 bg-light">
-                <h4 className="ps-5 pt-4 pb-2 mean-title">Statistic and Reports</h4>
+                <h4 className="ps-3 pt-4 pb-2 mean-title">Statistic and Reports</h4>
                 <hr />
                 <div className="container">
                     <div class="shadow-sm p-3 mb-3 bg-body rounded mt-4">
@@ -51,15 +51,15 @@ function StatisticReports() {
                                     />
                                 </div>
                                 <div className="align-self-center ps-3">
-                                    <button type="submit" className="btn btn-purple">Submit</button>
+                                    <button type="submit" className="btn_ btn-purple">Submit</button>
                                 </div>
                             </div>
-                            <div className="d-flex mt-4">
-                                <div className="col">
+                            <div className="col-md-12 d-flex means-chart">
+                                <div className="col-md-6 means-chart-I">
                                     <Line data={data} />
                                 </div>
                                 <div>&nbsp;</div>
-                                <div className="col">
+                                <div className="col-md-6 means-chart-II">
                                     <Line data={data} />
                                 </div>
                             </div>
