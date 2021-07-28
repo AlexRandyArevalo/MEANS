@@ -1,8 +1,12 @@
 /* ---------------------------------------------------
     FONT
 ----------------------------------------------------- */
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), url(./Poppins/Poppins-Regular.ttf) format('opentype');
+}
 * {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Poppins', 'Helvetica', sans-serif !important;
 }
 
 /* ---------------------------------------------------
@@ -12,46 +16,19 @@
 .means-header  {
   background-color: #9500f3 !important;
   color: #ffffff;
-  text-indent: 27px;
+  padding-left: 22px !important;
   margin-bottom: 0 !important;
 }
 .nav-link:focus,
 .nav-link:hover  {
   background-color: #9500f3 !important;
   color: #ffffff;
-  text-indent: 27px;
+  padding-left: 22px !important;
   margin-bottom: 0 !important;
 }
-
-.user-img {
-  justify-content: flex-end;
-  padding-right: 5% !important;
-}
-.user-img a { 
-  border: solid 1px #666; 
-  width: 5%;
-  max-width: 15%;
-  min-width: 40px !important;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;  
-}
-.user-img img { 
-  border: solid 2px #666; 
-  width: 5%;
-  max-width: 15%;
-  min-width: 40px !important;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;  
-}
-.user-img .nav-link {
-  width: 5vw;
-  display: flex;
-  white-space: nowrap;
-  padding-left: 22px;
+.means-user .rounded-circle {
+  /* position: absolute; */
+  /* right: 292px !important; */
 }
 .vLine {
   border: solid 1px #777;
@@ -124,9 +101,7 @@
   cursor: pointer;
   background-color: #9500f3;
   color: #FFFFFF;
-  min-width: 20% !important;
-  width: 100% !important;
-  min-width: 150px !important;
+  min-width: 110px !important;
   text-decoration: none;
   text-align: center;
 }
@@ -209,3 +184,55 @@ hr.vertical {
   width:1;
   border:1px solid #ccc;
 }
+
+/* ---------------------------------------------------
+    SEARCH
+----------------------------------------------------- */
+.center-block {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+.input-group .icon-addon .form-control {
+  border-radius: 0;
+}
+.icon-addon {
+  position: relative;
+  color: #9600f3b0;
+  display: block;
+}
+.icon-addon:after,
+.icon-addon:before {
+  display: table;
+  content: " ";
+}
+.icon-addon:after {
+  clear: both;
+}
+.icon-addon.addon-md .glyphicon,
+.icon-addon .glyphicon, 
+.icon-addon.addon-md .fa,
+.icon-addon .fa {
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  font-size: 14px;
+  width: 20px;
+  margin-left: -2.5px;
+  text-align: center;
+  padding: 10px 0;
+  /* top: 1px */
+}
+.icon-addon.addon-md .form-control,
+.icon-addon .form-control {
+  padding-left: 30px;
+  float: left;
+  font-weight: normal;
+}
+.icon-addon .form-control:focus + .glyphicon,
+.icon-addon:hover .glyphicon,
+.icon-addon .form-control:focus + .fa,
+.icon-addon:hover .fa {
+  color: #9500f3;
+}
+
