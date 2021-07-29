@@ -12,16 +12,14 @@ library.add(faUserPlus);
 function EmployeeMaintenance() {
     // Modal
     const [isOpen, setIsOpen] = useState(false);
-
     const showModal = () => {
         setIsOpen(true);
     };
-
     const hideModal = () => {
         setIsOpen(false);
     };
 
-    // Add Employee
+    // Individual Employee Data
     const [eid, setEid] = useState('')
     const [phoneno, setPhoneno] = useState('')
     const [lname, setLname] = useState('')
@@ -29,6 +27,7 @@ function EmployeeMaintenance() {
     const [mname, setMname] = useState('')
     const [addr, setAddr1] = useState('')
 
+    // Save Individual Employee
     const saveEmployee = (e) => {
         e.preventDefault();
         console.log(eid, '\n' +
@@ -39,7 +38,7 @@ function EmployeeMaintenance() {
         addr);
     }
 
-    // Upload Multiple Employees
+    // Upload Multiple Employees    
     const parseOptions = {
         header: true,
         dynamicTyping: true,
@@ -49,18 +48,48 @@ function EmployeeMaintenance() {
                 .toLowerCase()
                 .replace(/\W/g, '_')
     }
+
+    // Handle CSV Data On Upload
+    const [csvData, setCsvData] = useState([]);
     const handleData = (data, info) => {
-        console.log(data)
+        setCsvData(data)
     }
     const onError = (err) => {
         console.log(err)
     }
+
+    // Save CSV Data to DB
+    const SaveToDB = () => {
+        console.log(csvData)
+    }
+
+    const DataTable = [
+        {
+            id: 1,
+            title: "[Empty]",
+            location: "[Empty]",
+            description: "[Empty]"
+        },
+        {
+            id: 2,
+            title: "[Empty]",
+            location: "[Empty]",
+            description: "[Empty]"
+        },
+        {
+            id: 3,
+            title: "[Empty]",
+            location: "[Empty]",
+            description: "[Empty]"
+        }
+    ]
+
     return (<div>
         <Header />
         <div className="d-flex">
             <Menubar />
             <div className="means-body col-md-9 bg-light">
-                <h4 className="ps-3 pt-4 pb-2 mean-title">Employee Maintenance</h4>
+                <h4 className="ps-4 pt-4 pb-2 mean-title">Employee Maintenance</h4>
                 <hr />
                 <div className="container">
                     <div className="col-md-12 d-flex mt-4 emp-main">
@@ -86,7 +115,7 @@ function EmployeeMaintenance() {
                                 />
                                 <br />
                                 <br />
-                                <button type="button" className="btn_ btn-purple w-100">Submit</button>
+                                <button type="button" className="btn_ btn-purple w-100" onClick={SaveToDB}>Submit</button>
                             </div>
                         </div>
                         <div className="col-md-9 employee-list">
@@ -111,31 +140,23 @@ function EmployeeMaintenance() {
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
+                                                <th width="5%">#</th>
+                                                <th width="25%">Empty</th>
+                                                <th width="20%">Empty</th>
+                                                <th width="20%">Empty</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            {
+                                                DataTable.map(data =>
+                                                    <tr>
+                                                        <th scope="row">{data.id}</th>
+                                                        <td>{data.title}</td>
+                                                        <td>{data.location}</td>
+                                                        <td>{data.description}</td>
+                                                    </tr>
+                                                )
+                                            }
                                         </tbody>
                                     </table>
                                 </div>

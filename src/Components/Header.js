@@ -12,7 +12,7 @@ function Header() {
             <div className="navbar-collapse">
                 <ul className="navbar-nav ml-auto text-center">
                     <li className="nav-item means">
-                        <a className="nav-link fs-3" href="#">MEANS</a>
+                        <Link className="nav-link fs-3" to="/">MEANS</Link>
                     </li>
                 </ul>
             </div>

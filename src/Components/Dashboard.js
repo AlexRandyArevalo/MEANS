@@ -3,12 +3,34 @@ import Header from './Header';
 import Menubar from './Menubar';
 
 function Dashboard() {
+
+    const DataTable = [
+        {
+            id: 1,
+            title: "[Empty]",
+            location: "[Empty]",
+            description: "[Empty]"
+        },
+        {
+            id: 2,
+            title: "[Empty]",
+            location: "[Empty]",
+            description: "[Empty]"
+        },
+        {
+            id: 3,
+            title: "[Empty]",
+            location: "[Empty]",
+            description: "[Empty]"
+        }
+    ]
+
     return (<div>
         <Header />
         <div className="d-flex">
             <Menubar />
             <div className="means-body col-md-9 bg-light">
-                <h4 className="ps-3 pt-4 pb-2 mean-title">Dashboard</h4>
+                <h4 className="ps-4 pt-4 pb-2 mean-title">Dashboard</h4>
                 <hr />
                 <div className="container">
 
@@ -52,31 +74,23 @@ function Dashboard() {
                                 <table className="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
+                                            <th width="5%">#</th>
+                                            <th width="25%">Empty</th>
+                                            <th width="20%">Empty</th>
+                                            <th width="20%">Empty</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        {
+                                            DataTable.map(data =>
+                                                <tr>
+                                                    <th scope="row">{data.id}</th>
+                                                    <td>{data.title}</td>
+                                                    <td>{data.location}</td>
+                                                    <td>{data.description}</td>
+                                                </tr>
+                                            )
+                                        }
                                     </tbody>
                                 </table>
                             </div>
