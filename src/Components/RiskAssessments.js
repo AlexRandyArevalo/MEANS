@@ -19,6 +19,7 @@ library.add(
 );
 
 function RiskAssessments() {
+    // Delete Employee
     const Delete = param => event => {
         console.log(param);
         Swal({
@@ -45,11 +46,19 @@ function RiskAssessments() {
         })
     }
 
+    // Edit Modal
+    const [isOpen, setIsOpen] = useState(false);
+    const showModal = () => {
+        setIsOpen(true);
+    };
+    const hideModal = () => {
+        setIsOpen(false);
+    };
+
     // Add Employee
     const [title, setTitle] = useState('')
     const [loc, setLoc] = useState('')
     const [desc, setDesc] = useState('')
-
     const saveEmployee = (e) => {
         e.preventDefault();
         console.log(title, '\n' +
@@ -57,16 +66,7 @@ function RiskAssessments() {
         desc);
     }
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const showModal = () => {
-        setIsOpen(true);
-    };
-
-    const hideModal = () => {
-        setIsOpen(false);
-    };
-
+    // Static Data
     const DataTable = [
         {
             id: 1,

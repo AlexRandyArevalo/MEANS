@@ -28,6 +28,7 @@ function AddRiskAssessments() {
         console.log(risklevel, '\n' + def);
     }
 
+    // Static Data
     const DataTable = [
         {
             id: 1,

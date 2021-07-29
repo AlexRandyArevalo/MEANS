@@ -5,7 +5,8 @@ import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import { Pie } from "react-chartjs-2";
 
 function StatisticReports() {
-    const data = {
+    // Pie Data I
+    const Data_I = {
         // labels: [
         //   'Red',
         //   'Blue',
@@ -25,7 +26,8 @@ function StatisticReports() {
         }]
     };
 
-    const data2 = {
+    // Pie Data II
+    const Data_II = {
         // labels: [
         //   'Red',
         //   'Blue',
@@ -45,6 +47,7 @@ function StatisticReports() {
         }]
     };
 
+    // Static Data
     const DataTable = [
         {
             id: 1,
@@ -66,6 +69,7 @@ function StatisticReports() {
         }
     ]
 
+    // DropDown Static Data
     const dropdownlist = [
         {
             id: 1,
@@ -108,10 +112,10 @@ function StatisticReports() {
 
                         <div className="col-md-12 d-flex means-chart">
                             <div className="col-md-4 means-chart-I p-4 mx-auto">
-                                <Pie data={data} />
+                                <Pie data={Data_I} />
                             </div>
                             <div className="col-md-4 means-chart-II p-4 mx-auto">
-                                <Pie data={data2} />
+                                <Pie data={Data_II} />
                             </div>
                         </div>
                     </div>

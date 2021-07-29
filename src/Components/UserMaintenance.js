@@ -3,6 +3,7 @@ import Header from './Header';
 import Menubar from './Menubar';
 
 function UserMaintenance() {
+    // Input Data
     const [eid, setEid] = useState('')
     const [phoneno, setPhoneno] = useState('')
     const [lname, setLname] = useState('')
@@ -11,6 +12,7 @@ function UserMaintenance() {
     const [addr1, setAddr1] = useState('')
     const [addr2, setAddr2] = useState('')
 
+    // Validate Data
     const handleValidate = (e) => {
         e.preventDefault();
         console.log(eid, '\n' +
@@ -21,6 +23,7 @@ function UserMaintenance() {
             addr1, '\n' +
             addr2);
     }
+
     return (<div>
         <Header />
         <div className="d-flex">

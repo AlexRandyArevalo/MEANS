@@ -3,7 +3,7 @@ import Header from './Header';
 import Menubar from './Menubar';
 
 function Dashboard() {
-
+    // Static Data
     const DataTable = [
         {
             id: 1,

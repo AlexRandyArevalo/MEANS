@@ -63,6 +63,7 @@ function EmployeeMaintenance() {
         console.log(csvData)
     }
 
+    // Static Data
     const DataTable = [
         {
             id: 1,
