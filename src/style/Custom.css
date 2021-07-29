@@ -118,6 +118,24 @@
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.17);
   background-color: #8003d0 !important;
 }
+.means-back-btn {
+  float: left;
+  color: #999;
+  font-size: 14px;
+  width: 7%;
+  white-space: nowrap;
+}
+.means-back-btn:hover {
+  float: left;
+  color: #777;
+  font-size: 14px;
+  width: 7%;
+  white-space: nowrap;
+}
+.means-back-btn:hover {
+  outline: none;
+  box-shadow: none;
+}
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -236,3 +254,12 @@ hr.vertical {
   color: #9500f3;
 }
 
+/* ---------------------------------------------------
+    ACTION BUTTON
+----------------------------------------------------- */
+.risk-assess .delete:hover {
+  color: #dc354585 !important;
+}
+.risk-assess .edit:hover {
+  color: #ffc10775 !important;
+}
