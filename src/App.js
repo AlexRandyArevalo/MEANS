@@ -1,51 +1,49 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import './style/Custom.css';
-import Login from './Login';
-
+import './Components/custom-style/style.css';
+import Login from './Pages/Login';
 
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import Dashboard from './Components/Dashboard';
-import RiskAssessments from './Components/RiskAssessments';
-import AddRiskAssessments from './Components/AddRiskAssessments';
-import RiskLevelManagement from './Components/RiskLevelManagement';
-import EmployeeMaintenance from './Components/EmployeeMaintenance';
-import EditRiskAssessments from './Components/EditRiskAssessments';
-import UserMaintenance from './Components/UserMaintenance';
-import StatisticReports from './Components/StatisticAndReports';
+import Header from './Components/header/header/header.component';
+import Menu from './Components/menu/menu.component';
 
+import Dashboard from './Pages/Dashboard';
+import RiskAssessments from './Pages/RiskAssessments';
+import AddRiskAssessments from './Pages/AddRiskAssessments';
+import EmployeeMaintenance from './Pages/EmployeeMaintenance';
+import UserMaintenance from './Pages/UserMaintenance';
+import StatisticReports from './Pages/StatisticAndReports';
+
+// import Testroute from './sampleroute'
 
 function App() {
+  const filter = [
+    "/",
+    "/riskassessments",
+    "/addriskassessments",
+    "/employeemaintenance",
+    "/usermaintenance",
+    "/statisticreports"
+  ]
   return (
     <div className="App">
-      
+
       {/* ROUTE */}
       <BrowserRouter>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/" component={Dashboard} />
-        <Route exact path="/riskassessments" component={RiskAssessments} />
-        <Route exact path="/addriskassessments" component={AddRiskAssessments} />
-        <Route exact path="/risklevelmanagement" component={RiskLevelManagement} />
-        <Route exact path="/employeemaintenance" component={EmployeeMaintenance} />
-        <Route exact path="/editriskassessments" component={EditRiskAssessments} />
-        <Route exact path="/usermaintenance" component={UserMaintenance} />
-        <Route exact path="/statisticreports" component={StatisticReports} />
+        <Route exact path={ filter }><Header /></Route>
+        <div className="d-flex">
+          <Route exact path={ filter }><Menu /></Route>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/riskassessments" component={RiskAssessments} />
+          <Route exact path="/addriskassessments" component={AddRiskAssessments} />
+          <Route exact path="/employeemaintenance" component={EmployeeMaintenance} />
+          <Route exact path="/usermaintenance" component={UserMaintenance} />
+          <Route exact path="/statisticreports" component={StatisticReports} />
+        </div>
       </BrowserRouter>
       {/* /ROUTE */}
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
+
     </div>
   );
 }
