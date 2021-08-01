@@ -1,0 +1,81 @@
+/* ---------------------------------------------------
+    FONT
+----------------------------------------------------- */
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins'), url(Poppins/Poppins-Regular.ttf) format('opentype');
+}
+* {
+    font-family: 'Poppins', 'Helvetica', sans-serif !important;
+}
+
+/* ---------------------------------------------------
+    TITLE
+----------------------------------------------------- */
+.mean-title {
+    color: #9500f3;
+}
+
+/* ---------------------------------------------------
+    BODY
+----------------------------------------------------- */
+.means-body {
+    height: calc(100vh - 96px);
+    min-height: 50vh;
+    overflow-y: auto;
+}
+
+/* ---------------------------------------------------
+    BUTTON STYLE
+----------------------------------------------------- */
+.btn_ {
+    border-width: 2px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.35em;
+    margin: 10px 1px;
+    border: none;
+    border-radius: 0% !important;
+    padding: 11px 22px;
+    cursor: pointer;
+    background-color: #9500f3;
+    color: #FFFFFF;
+    min-width: 110px !important;
+    text-decoration: none;
+    text-align: center;
+}
+.btn_:active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: 0 !important;
+}
+.btn-purple {
+    background-color: #9500f3 !important;
+    color: #FFFFFF !important;
+}
+.btn-purple:hover {
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.17);
+    background-color: #8003d0 !important;
+}
+
+/* ---------------------------------------------------
+    <-BACK BUTTON STYLE
+----------------------------------------------------- */
+.means-back-btn {
+    float: left;
+    color: #999;
+    font-size: 14px;
+    width: 7%;
+    white-space: nowrap;
+}
+.means-back-btn:hover {
+    float: left;
+    color: #777;
+    font-size: 14px;
+    width: 7%;
+    white-space: nowrap;
+}
+.means-back-btn:hover {
+    outline: none;
+    box-shadow: none;
+}

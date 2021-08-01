@@ -1,0 +1,27 @@
+@media only screen and (max-width: 986px) {
+    .means-user .nav-item {
+        text-align: center !important;
+        padding-left: 10% !important;
+        display: inline-block;
+    }
+    .means-user .last-child {
+        display: inline-block !important;
+    }
+    .means-user .last-child .vLine {
+        display: none;
+    }
+    .means-user .rounded-circle,
+    .means-user .nav-link {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .means-header .means {
+        padding: 0 !important;
+    }
+}
+@media only screen and (max-width: 720px) {
+    .means-header .means {
+        padding-right: 29px !important;
+    }
+}

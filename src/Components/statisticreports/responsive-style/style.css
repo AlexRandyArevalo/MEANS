@@ -1,0 +1,9 @@
+@media only screen and (max-width: 986px) {
+    .means-pie-chart {
+        flex-direction: column !important;
+    }
+    .means-pie-chart .means-pie-chart-I,
+    .means-pie-chart .means-pie-chart-II {
+        width: 100% !important;
+    }
+}

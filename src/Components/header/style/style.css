@@ -1,0 +1,21 @@
+.nav-link,
+.means-header  {
+  background-color: #9500f3 !important;
+  color: #ffffff;
+  padding-left: 22px !important;
+  margin-bottom: 0 !important;
+}
+.nav-link:focus,
+.nav-link:hover  {
+  background-color: #9500f3 !important;
+  color: #ffffff;
+  padding-left: 22px !important;
+  margin-bottom: 0 !important;
+}
+.vLine {
+  border: solid 1px #777;
+  width: 1px;
+  height: 40px;
+  position: absolute;
+  margin-left: 10px;
+}

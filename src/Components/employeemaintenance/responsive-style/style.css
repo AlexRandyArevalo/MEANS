@@ -1,0 +1,20 @@
+@media only screen and (max-width: 986px) {
+    .risk-assess .search,
+    .risk-assess .btn_ {
+        width: 100% !important;
+    }
+    .emp-main {
+        flex-direction: column !important;
+    }
+    .emp-main .upload-employees,
+    .emp-main .employee-list {
+        width: 100% !important;
+    }
+    .emp-main .employee-list .col-md-12 {
+        flex-direction: column !important;
+    }
+    .emp-main .employee-list .search,
+    .emp-main .employee-list .btn_ {
+        width: 100% !important;
+    }
+}

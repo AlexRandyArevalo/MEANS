@@ -1,0 +1,33 @@
+@media only screen and (max-width: 958px) {
+    /* Dashboard */
+    .means-card {
+        width: 100% !important;
+    }
+    .mean-card-main {
+        width: 100% !important;
+        flex-direction: column !important;
+    }
+    .means-body {
+        width: calc(100vw - 230px);
+    }
+}
+.means-card .rounded {
+    min-width: 220px;
+}
+.means-card-total {
+    color: #9500f3;
+    font-size: 21px;
+    font-weight: 700;
+    margin: auto;
+}
+.means-card-title {
+    color: #333333;
+    font-size: 21px;
+    font-weight: 700;
+    margin: auto;
+}
+hr.vertical {
+    height:100px;
+    width:1;
+    border:1px solid #ccc;
+}

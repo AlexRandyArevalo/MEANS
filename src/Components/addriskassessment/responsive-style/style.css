@@ -1,0 +1,9 @@
+@media only screen and (max-width: 986px) {
+    .add-risk {
+        flex-direction: column !important;
+    }
+    .add-risk .add-risk-list {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+}
