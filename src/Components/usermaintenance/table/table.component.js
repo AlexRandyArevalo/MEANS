@@ -4,8 +4,9 @@ import Swal from 'sweetalert'
 import { Modal, OverlayTrigger, Popover } from "react-bootstrap"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ClipLoader } from "react-spinners"
+import '../../custom-style/style.css'
 import Table from '../../table.component/table.component'
+import { ClipLoader } from "react-spinners";
 import {
     faTrashAlt,
     faEdit,
@@ -17,13 +18,23 @@ library.add(
     faEllipsisH
 );
 
-class EmployeeList extends Component {
+export default class UserList extends Component {
+
+    /*addressOne: "gapan city"
+    addressTwo: "nueva ecija"
+    contact: "9123456789"
+    eid: "aa@accenture.com"
+    fName: "alex"
+    lName: "arevalo"
+    mName: "vargas"
+    __v: 0
+    _id: "6108d214b5f810001528ec07"*/
+
     constructor(props) {
         super(props)
         this.state = {
             id: "",
             color: "#9500f3",
-            prefix: "",
             loader: {
                 loading: false,
                 didmount: false
@@ -31,48 +42,49 @@ class EmployeeList extends Component {
             loader_edit: {
                 loading_edit: false
             },
-            employees: {
+            users: {
                 data: []
             },
             modal: {
                 showHide: false
             },
-            employee: {
+            user: {
                 eid: "",
                 phoneno: "",
                 lname: "",
                 fname: "",
                 mname: "",
-                addr: ""
+                addr1: "",
+                addr2: ""
             }
         }
     }
 
-    // Modal
+    // Modal Toggle
     showModal = () => {
         this.setState({ modal: { showHide: true } })
-    }
 
+    }
     hideModal = () => {
         this.setState({ modal: { showHide: false } })
     }
 
-    // Prep Employees Data
+    // Prep Users Data
     componentDidMount() {
-        this.setState({ loader: { didmount: true } })
+        this.state.loader.didmount = true
         this.setDataTable()
     }
 
-    // Display List of Employees
+    // Display List of Users
     setDataTable() {
-        console.log(this)
-        if (this.state.loader.didmount)
+        if (!!this.state.loader.didmount)
             this.setState({ loader: { loading: true } }) // Show Loader
-        axios.get("/employees")
+
+        axios.get("/users")
             .then(res => {
                 if (res.data.status) {
                     this.setState({
-                        employees: {
+                        users: {
                             data: res.data.data
                         }
                     })
@@ -84,7 +96,7 @@ class EmployeeList extends Component {
             .catch(err => console.log(err))
     }
 
-    // Delete Employee
+    // Delete User
     Delete = (that) => {
         Swal({
             title: `Delete ${that.lName}, ${that.fName}?`,
@@ -116,20 +128,22 @@ class EmployeeList extends Component {
         })
     }
 
-    // Edit Employee
+    // Edit User
     Edit = (id) => {
-        axios.get(`/employee/${id}`)
+        console.log('edit')
+        axios.get(`/user/${id}`)
             .then(res => {
                 if (res.data.status) {
                     this.setState({
                         id: id,
-                        employee: {
+                        user: {
                             eid: res.data.data.eid,
                             phoneno: res.data.data.contact,
                             lname: res.data.data.lName,
                             fname: res.data.data.fName,
                             mname: res.data.data.mName,
-                            addr: res.data.data.address
+                            addr1: res.data.data.addressOne,
+                            addr2: res.data.data.addressTwo
                         }
                     })
                     this.showModal()
@@ -140,7 +154,9 @@ class EmployeeList extends Component {
             .catch(err => console.log(err))
     }
 
-    updateEmployee = (e) => {
+    // Save to DB
+    updateUser = (e) => {
+
         e.preventDefault()
         this.setState({ loader_edit: { loading_edit: true } }) // Show Loader
         let jsonData = {
@@ -149,9 +165,11 @@ class EmployeeList extends Component {
             lname: e.target.lname.value,
             fname: e.target.fname.value,
             mname: e.target.mname.value,
-            addr: e.target.addr.value
+            addr1: e.target.addr1.value,
+            addr2: e.target.addr2.value
         }
-        axios.patch(`/employee/${this.state.id}`, jsonData)
+        console.log(this.state.user)
+        axios.patch(`/user/${this.state.id}`, jsonData)
             .then((res) => {
                 this.setDataTable()
                 this.setState({ loader_edit: { loading_edit: false } }) // Hide Loader
@@ -174,7 +192,8 @@ class EmployeeList extends Component {
                         <th width="13.5%" className="text-nowrap">First Name</th>
                         <th width="13.5%" className="text-nowrap">Middle Name</th>
                         <th width="13.5%">Contact</th>
-                        <th width="13.5%">Address</th>
+                        <th width="13.5%">Address I</th>
+                        <th width="13.5%">Address II</th>
                         <th width="13.5%"></th>
                     </tr>
                 }
@@ -184,15 +203,16 @@ class EmployeeList extends Component {
                     </div>
                 }
                 Body={
-                    this.state.employees.data.map((emp, index) =>
+                    this.state.users.data.map((user, index) =>
                     (<tr key={index}>
                         <td>{index + 1}</td>
-                        <td className="text-truncate td-mw-12" title={emp.eid}>{this.state.employees.data[index].eid}</td>
-                        <td className="text-truncate td-mw-12" title={emp.lName}>{this.state.employees.data[index].lName}</td>
-                        <td className="text-truncate td-mw-12" title={emp.fName}>{this.state.employees.data[index].fName}</td>
-                        <td className="text-truncate td-mw-12" title={emp.mName}>{this.state.employees.data[index].mName}</td>
-                        <td className="text-truncate td-mw-12" title={emp.contact}>{this.state.employees.data[index].contact}</td>
-                        <td className="text-truncate td-mw-12" title={emp.address}>{this.state.employees.data[index].address}</td>
+                        <td className="text-truncate td-mw-12 text-muted" title={user.eid}>{this.state.users.data[index].eid}</td>
+                        <td className="text-truncate td-mw-12 text-muted" title={user.lName}>{this.state.users.data[index].lName}</td>
+                        <td className="text-truncate td-mw-12 text-muted" title={user.fName}>{this.state.users.data[index].fName}</td>
+                        <td className="text-truncate td-mw-12 text-muted" title={user.mName}>{this.state.users.data[index].mName}</td>
+                        <td className="text-truncate td-mw-12 text-muted" title={user.contact}>{this.state.users.data[index].contact}</td>
+                        <td className="text-truncate td-mw-12 text-muted" title={user.addressOne}>{this.state.users.data[index].addressOne}</td>
+                        <td className="text-truncate td-mw-12 text-muted" title={user.addressTwo}>{this.state.users.data[index].addressTwo}</td>
                         <td>
                             <OverlayTrigger
                                 trigger={'click'}
@@ -202,8 +222,8 @@ class EmployeeList extends Component {
                                 overlay={
                                     <Popover>
                                         <Popover.Content>
-                                            <a href="#" className="text-dark p-2" onClick={() => this.Delete(emp)}><FontAwesomeIcon icon="trash-alt" /></a>
-                                            <a href="#" className="text-dark p-2" onClick={() => this.Edit(emp._id)}><FontAwesomeIcon icon="edit" /></a>
+                                            <a href="#" className="text-dark p-2" onClick={() => this.Delete(user)}><FontAwesomeIcon icon="trash-alt" /></a>
+                                            <a href="#" className="text-dark p-2" onClick={() => this.Edit(user._id)}><FontAwesomeIcon icon="edit" /></a>
                                         </Popover.Content>
                                     </Popover>
                                 }>
@@ -216,93 +236,45 @@ class EmployeeList extends Component {
             />
             <Modal show={this.state.modal.showHide} size="lg">
                 <Modal.Header>
-                    <Modal.Title>Edit Employee</Modal.Title>
+                    <Modal.Title>Edit User</Modal.Title>
                 </Modal.Header>
-                <form onSubmit={this.updateEmployee}>
+                <form onSubmit={this.updateUser}>
                     <Modal.Body>
+
                         <div className="row m-3">
                             <div className="col-md-7">
                                 <label className="text-muted ps-1 fs-13">E.I.D</label>
-                                <input
-                                    onChange={(e) => this.setState({ employee: { eid: e.target.value } })}
-                                    value={this.state.employee.eid}
-                                    name="eid"
-                                    type="email"
-                                    className="form-control"
-                                    placeholder="E.I.D"
-                                    required
-                                />
+                                <input onChange={(e) => this.setState({ user: { eid: e.target.value } })} value={this.state.user.eid} name="eid" type="email" className="form-control" placeholder="E.I.D" required />
                             </div>
                             <div className="col-md-5">
                                 <label className="text-muted ps-1 fs-13">Contact</label>
                                 <div className="input-group">
-
-                                    <input
-                                        onChange={(e) => this.setState({ prefix: e.target.value })}
-                                        type="text" className="form-control"
-                                        value="+63"
-                                        style={{ maxWidth: "55px" }}
-                                    />
-                                    <input
-                                        onChange={(e) => this.setState({ employee: { phoneno: e.target.value } })}
-                                        value={this.state.employee.phoneno}
-                                        name="phoneno"
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="___-___-__"
-                                        required
-                                    />
+                                    <input type="text" className="form-control" value="+63" style={{ maxWidth: "55px" }} />
+                                    <input onChange={(e) => this.setState({ user: { phoneno: e.target.value } })} value={this.state.user.phoneno} name="phoneno" type="text" className="form-control" placeholder="___-___-__" required />
                                 </div>
                             </div>
                             <div className="col-md-4 mt-4">
                                 <label className="text-muted ps-1 fs-13">Last Name</label>
-                                <input
-                                    onChange={(e) => this.setState({ employee: { lname: e.target.value } })}
-                                    value={this.state.employee.lname}
-                                    name="lname"
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Last Name"
-                                    required
-                                />
+                                <input onChange={(e) => this.setState({ user: { lname: e.target.value } })} value={this.state.user.lname} name="lname" type="text" className="form-control" placeholder="Last Name" required />
                             </div>
                             <div className="col-md-4 mt-4">
                                 <label className="text-muted ps-1 fs-13">First Name</label>
-                                <input
-                                    onChange={(e) => this.setState({ employee: { fname: e.target.value } })}
-                                    value={this.state.employee.fname}
-                                    name="fname"
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="First Name"
-                                    required
-                                />
+                                <input onChange={(e) => this.setState({ user: { fname: e.target.value } })} value={this.state.user.fname} name="fname" type="text" className="form-control" placeholder="First Name" required />
                             </div>
                             <div className="col-md-4 mt-4">
                                 <label className="text-muted ps-1 fs-13">Middle Name</label>
-                                <input
-                                    onChange={(e) => this.setState({ employee: { mname: e.target.value } })}
-                                    value={this.state.employee.mname}
-                                    name="mname"
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Middle Name"
-                                    required
-                                />
+                                <input onChange={(e) => this.setState({ user: { mname: e.target.value } })} value={this.state.user.mname} name="mname" type="text" className="form-control" placeholder="Middle Name" required />
                             </div>
                             <div className="col-md-12 mt-4">
-                                <label className="text-muted ps-1 fs-13">Address</label>
-                                <input
-                                    onChange={(e) => this.setState({ employee: { addr: e.target.value } })}
-                                    value={this.state.employee.addr}
-                                    name="addr"
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Address Line 1"
-                                    required
-                                />
+                                <label className="text-muted ps-1 fs-13">Address Line 1</label>
+                                <input onChange={(e) => this.setState({ user: { addr1: e.target.value } })} value={this.state.user.addr1} name="addr1" type="text" className="form-control" placeholder="Address Line 1" required />
+                            </div>
+                            <div className="col-md-12 mt-4">
+                                <label className="text-muted ps-1 fs-13">Address Line 2</label>
+                                <input onChange={(e) => this.setState({ user: { addr2: e.target.value } })} value={this.state.user.addr2} name="addr2" type="text" className="form-control" placeholder="Address Line 2" />
                             </div>
                         </div>
+
                     </Modal.Body>
                     <Modal.Footer>
                         <button className="btn btn-secondary" onClick={() => this.hideModal()}>Cancel</button>
@@ -316,5 +288,3 @@ class EmployeeList extends Component {
         </div>)
     }
 }
-
-export default EmployeeList;
