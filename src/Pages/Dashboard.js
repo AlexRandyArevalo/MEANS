@@ -1,9 +1,10 @@
 import React from 'react'
-//import axios from 'axios'
+// import axios from 'axios'
 import Cards from '../Components/dashboard/cards/card.component'
 import Table from '../Components/dashboard/table/table.component'
 
-function Dashboard() {    
+function Dashboard() {  
+    
     return (<div className="means-body col-md-9 bg-light">
         <h4 className="ps-4 pt-4 pb-2 mean-title">Dashboard</h4>
         <hr />

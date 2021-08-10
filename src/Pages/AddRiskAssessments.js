@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom'
 import '../Components/addriskassessment/responsive-style/style.css'
-import AddRiskForm from '../Components/addriskassessment/form/add.risk.assess.component'
+import AddRiskForm from '../Components/addriskassessment/form/add.risk.form.component'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 library.add(faPlus, faArrowLeft);
+
+
+
 
 function AddRiskAssessments() {
     return (<div className="means-body col-md-9 bg-light">

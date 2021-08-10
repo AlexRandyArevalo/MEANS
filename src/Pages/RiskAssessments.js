@@ -22,7 +22,7 @@ function RiskAssessments() {
             <div className="shadow-sm p-3 mb-5 bg-body rounded risk-assess">
                 <h5 className="pb-3">Risk Assessments</h5>
                 <Table />
-            </div>            
+            </div>
         </div>
     </div>)
 }
