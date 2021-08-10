@@ -3,6 +3,7 @@ import './Components/custom-style/style.css';
 import Login from './Pages/Login';
 
 import { BrowserRouter, Route } from 'react-router-dom'
+import { ToastProvider, useToasts } from 'react-toast-notifications'
 
 import Header from './Components/header/header/header.component';
 import Menu from './Components/menu/menu.component';
@@ -30,9 +31,9 @@ function App() {
 
       {/* ROUTE */}
       <BrowserRouter>
-        <Route exact path={ filter }><Header /></Route>
+        <Route exact path={filter}><Header /></Route>
         <div className="d-flex">
-          <Route exact path={ filter }><Menu /></Route>
+          <Route exact path={filter}><Menu /></Route>
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/riskassessments" component={RiskAssessments} />
