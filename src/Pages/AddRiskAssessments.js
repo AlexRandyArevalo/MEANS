@@ -7,11 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 library.add(faPlus, faArrowLeft);
 
-
-
-
-function AddRiskAssessments() {
-    return (<div className="means-body col-md-9 bg-light">
+function AddRiskAssessments() {    
+    return (<div className="means-body col-md-10 bg-light">
         <h4 className="ps-4 pt-4 pb-2 mean-title">Add Risk Assessments</h4>
         <hr />
         <div className="container">
