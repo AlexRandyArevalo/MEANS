@@ -1,16 +1,29 @@
-import './style.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faSearch} from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { Component } from 'react';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+
 library.add(faSearch);
 
-function Search() {
-    return (<div className="form-group">
-        <div className="icon-addon addon-md">
-            <input type="text" placeholder="Search" className="form-control w-50 search" />
-            <label for="Search" className="glyphicon glyphicon-search" rel="tooltip" title="Search"><FontAwesomeIcon icon="search" /></label>
-        </div>
-    </div>)
+export default class Search extends Component {
+    render() {
+        return (<div className="form-group w-50">
+            <ReactSearchAutocomplete
+                items={this.props.items}
+                onSelect={this.props.onselect}
+                onClear={this.props.onclear}
+                fuseOptions={this.props.fuseoptions}
+                styling={{
+                    height: "40px",
+                    borderRadius: "4px",
+                    backgroundColor: "white",
+                    boxShadow: "none",
+                    hoverBackgroundColor: "#9500f31f",
+                    fontSize: "12px",
+                    iconColor: "#9600f3b0",
+                    clearIconMargin: "3px 8px 0 0",
+                }}
+            />
+        </div>)
+    }
 }
-
-export default Search;
