@@ -1,47 +1,43 @@
-function Table() {
-    // Static Data
-    const DataTable = [
-        {
-            id: 1,
-            title: "[Empty]",
-            location: "[Empty]",
-            description: "[Empty]"
-        },
-        {
-            id: 2,
-            title: "[Empty]",
-            location: "[Empty]",
-            description: "[Empty]"
-        },
-        {
-            id: 3,
-            title: "[Empty]",
-            location: "[Empty]",
-            description: "[Empty]"
-        }
-    ]
-    return (<table className="table">
-        <thead>
-            <tr>
-                <th width="5%">#</th>
-                <th width="25%">Empty</th>
-                <th width="20%">Empty</th>
-                <th width="20%">Empty</th>
-            </tr>
-        </thead>
-        <tbody>
-            {
-                DataTable.map(data =>
-                    <tr>
-                        <th scope="row">{data.id}</th>
-                        <td>{data.title}</td>
-                        <td>{data.location}</td>
-                        <td>{data.description}</td>
-                    </tr>
-                )
-            }
-        </tbody>
-    </table>)
-}
+import { Component } from "react";
+import Table from "../../table.component/table.component";
+import { ClipLoader } from "react-spinners"
 
-export default Table;
+export default class EmployeeAtRiskTable extends Component {
+    state = {
+        color: "#9500f3",
+        loader: false,
+    }
+    render() {
+        return (<Table
+            Header={
+                <tr>
+                    <th width="5%">#</th>
+                    <th width="13.5%">EID</th>
+                    <th width="13.5%" className="text-nowrap">Last Name</th>
+                    <th width="13.5%" className="text-nowrap">First Name</th>
+                    <th width="13.5%" className="text-nowrap">Middle Name</th>
+                    <th width="13.5%">Contact</th>
+                    <th width="13.5%">Address</th>
+                </tr>
+            }
+            Loader={
+                <tr>
+                    <td className="sweet-loading pt-2 ps-1" style={{ borderBottom: "none", padding: "0px" }}>
+                        <ClipLoader color={this.state.color} loading={this.state.loader} size={24} />
+                    </td>
+                </tr>
+            }
+            Body={
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        />)
+    }
+}

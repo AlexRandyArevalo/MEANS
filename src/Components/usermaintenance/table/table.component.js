@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Modal, OverlayTrigger, Popover } from "react-bootstrap"
+import { Modal } from "react-bootstrap"
+import Tippy from '@tippyjs/react';
+import "tippy.js/dist/tippy.css";
+import 'tippy.js/animations/scale.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../../custom-style/style.css'
@@ -21,17 +24,6 @@ library.add(
 );
 
 export default class UserList extends Component {
-
-    /*addressOne: "gapan city"
-    addressTwo: "nueva ecija"
-    contact: "9123456789"
-    eid: "aa@accenture.com"
-    fName: "alex"
-    lName: "arevalo"
-    mName: "vargas"
-    __v: 0
-    _id: "6108d214b5f810001528ec07"*/
-
     constructor(props) {
         super(props)
         this.state = {
@@ -88,7 +80,6 @@ export default class UserList extends Component {
         console.log('setDataTable')
         if (!!this.state.loader.didmount)
             this.setState({ loader: { loading: true } }) // Show Loader
-
         axios.get("/users")
             .then(res => {
                 if (res.data.status) {
@@ -242,6 +233,7 @@ export default class UserList extends Component {
         }
 
         return (<div>
+
             <ToastProvider>
                 <div className="shadow-sm p-3 mb-5 bg-body rounded">
                     <h5 className="pb-3">User List</h5>
@@ -261,14 +253,16 @@ export default class UserList extends Component {
                                 </tr>
                             }
                             Loader={
-                                <div className="sweet-loading pt-2 ps-1">
-                                    <ClipLoader color={this.state.color} loading={this.state.loader.loading} size={24} />
-                                </div>
+                                <tr>
+                                    <td className="sweet-loading pt-2 ps-1" style={{ borderBottom: "none", padding: "0px" }}>
+                                        <ClipLoader color={this.state.color} loading={this.state.loader.loading} size={24} />
+                                    </td>
+                                </tr>
                             }
                             Body={
                                 this.state.users.data.map((user, index) =>
                                 (<tr key={index}>
-                                    <td>{index + 1}</td>
+                                    <th>{index + 1}.</th>
                                     <td className="text-truncate td-mw-12 text-muted" title={user.eid}>{this.state.users.data[index].eid}</td>
                                     <td className="text-truncate td-mw-12 text-muted" title={user.lName}>{this.state.users.data[index].lName}</td>
                                     <td className="text-truncate td-mw-12 text-muted" title={user.fName}>{this.state.users.data[index].fName}</td>
@@ -277,21 +271,25 @@ export default class UserList extends Component {
                                     <td className="text-truncate td-mw-12 text-muted" title={user.addressOne}>{this.state.users.data[index].addressOne}</td>
                                     <td className="text-truncate td-mw-12 text-muted" title={user.addressTwo}>{this.state.users.data[index].addressTwo}</td>
                                     <td>
-                                        <OverlayTrigger
-                                            trigger={'click'}
-                                            rootClose={true}
-                                            key={'top'}
-                                            placement={'top'}
-                                            overlay={
-                                                <Popover>
-                                                    <Popover.Content>
-                                                        <a href="#" className="text-dark p-2" onClick={() => this.showModal_delete(user)}><FontAwesomeIcon icon="trash-alt" /></a>
-                                                        <a href="#" className="text-dark p-2" onClick={() => this.Edit(user._id)}><FontAwesomeIcon icon="edit" /></a>
-                                                    </Popover.Content>
-                                                </Popover>
-                                            }>
-                                            <a href="#" className="text-muted p-2 ellipsis" id={`Popover${index + 1}`}><FontAwesomeIcon icon="ellipsis-h" /></a>
-                                        </OverlayTrigger>
+                                        <Tippy
+                                            // offset={[0, 3]}
+                                            interactive={true}
+                                            animation="scale"
+                                            placement="top"
+                                            trigger="click"
+                                            content={
+                                                <div className="pt-2 pb-2">
+                                                    <a href="#" className="text-white p-2" onClick={() => this.showModal_delete(user)}>
+                                                        <FontAwesomeIcon icon="trash-alt" />
+                                                    </a>
+                                                    <a href="#" className="text-white p-2" onClick={() => this.Edit(user._id)}>
+                                                        <FontAwesomeIcon icon="edit" />
+                                                    </a>
+                                                </div>
+                                            }
+                                        >
+                                            <a href="#" className="text-muted" id={`Popover${index + 1}`}><FontAwesomeIcon icon="ellipsis-h" /></a>
+                                        </Tippy>
                                     </td>
                                 </tr>)
                                 )
@@ -300,15 +298,15 @@ export default class UserList extends Component {
                     </div >
                     {/* Edit User Modal */}
                     <ModalEditUser
-                        show={ this.state.modal.showHide }
-                        body={ this.Form() }
-                        footer={ <FooterButton /> }
+                        show={this.state.modal.showHide}
+                        body={this.Form()}
+                        footer={<FooterButton />}
                     />
                     <ModalDeleteUser
                         show={this.state.modal.showHide_delete}
-                        lastname={ this.state.lastname }
-                        firstname={ this.state.firstname }
-                        footer={ <ConfirmationButton /> }
+                        lastname={this.state.lastname}
+                        firstname={this.state.firstname}
+                        footer={<ConfirmationButton />}
                     />
                 </div>
             </ToastProvider>

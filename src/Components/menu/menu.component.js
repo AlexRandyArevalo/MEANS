@@ -25,7 +25,7 @@ library.add(
 );
 
 function Menu() {
-    return <div className="means-menubar col-md-3 bg-dark">
+    return <div className="means-menubar col-md-2 bg-dark">
         <nav id="sidebar">
             <ul className="list-unstyled components">
                 <p>&nbsp;</p>

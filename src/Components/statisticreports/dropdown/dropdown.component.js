@@ -1,36 +1,45 @@
-function DropDown() {
-    // DropDown Static Data
-    const dropdownlist = [
-        {
-            id: 1,
-            text: "Type of Risk 1"
-        },
-        {
-            id: 2,
-            text: "Type of Risk 2"
-        },
-        {
-            id: 3,
-            text: "Type of Risk 3"
-        }
-    ]
+import axios from "axios";
+import { Component } from "react";
 
-    return (<div className="card-header p-3 d-flex align-self-center bg-white">
-        <div className="col-md-6 align-self-center" >
-            Select Risk Assessment
-        </div>
-        <div className="col-md-6 align-self-center" style={{ display: "flex", justifyContent: "flex-end" }}>
-            <select className="form-select w-50" aria-label="Default select example">
-                <option selected>Please select</option>
-                {
-                    dropdownlist.map(riskdata =>
-                        <option value={riskdata.id}>{riskdata.text}</option>
-                    )
+export default class DropDown extends Component {
+    state = {
+        risklist: []
+    }
+    componentDidMount = () => {
+        this.getRiskAssessData()
+    }
+    getRiskAssessData = () => {
+        axios.get('/riskAssessments/')
+            .then((res) => {
+                if (res.data.status) {
+                    this.setState({ risklist: res.data.data })
                 }
-            </select>
-        </div>
-        
-    </div>)
-}
+            }, (err) => {
+                console.log(err.message)
+            });
+    }
+    RiskAssessList = () => {
+        if (!this.state.risklist) return null;
+        return (
+            this.state.risklist.map((risk, key) =>
+                <option key={key} value={risk._id}>{risk.title}</option>
+            )
+        )
+    }
 
-export default DropDown;
+    render() {
+        return (<div>
+            <div className="card-header p-3 d-flex align-self-center bg-white">
+                <div className="col-md-6 align-self-center">
+                    <select className="form-select w-50" defaultValue="default" onChange={this.props.selectedrisk}>
+                        <option value="default">Please select</option>
+                        {this.RiskAssessList()}
+                    </select>
+                </div>
+                <div className="col-md-6" style={{ display: "flex", justifyContent: "flex-end" }}>
+                    <button className="btn_outline btn-outline-purple" onClick={this.props.generatereport}>Generate Report</button>
+                </div>
+            </div>
+        </div>)
+    }
+}

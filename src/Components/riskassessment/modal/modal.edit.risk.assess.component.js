@@ -6,7 +6,7 @@ export default class ModalEditRiskAssess extends Component {
         return (
             <Modal show={this.props.show} onHide={this.props.hide} size="lg">
                 <Modal.Header>
-                    <Modal.Title>Edit Risk Assessmentx</Modal.Title>
+                    <Modal.Title>Edit Risk Assessment</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {this.props.form}

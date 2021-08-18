@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
-import { Modal, OverlayTrigger, Popover } from "react-bootstrap"
+import { Modal } from "react-bootstrap"
+import Tippy from '@tippyjs/react';
+import "tippy.js/dist/tippy.css";
+import 'tippy.js/animations/scale.css';
 import Table from '../../table.component/table.component'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import { ClipLoader } from "react-spinners";
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import { Link } from 'react-router-dom'
 import Search from '../../searchbox/search.component'
+import ModalEditRiskAssess from '../modal/modal.edit.risk.assess.component'
+import ModalRiskLevel from '../modal/modal.risk.level.component'
+import ModalDeleteRiskAssess from '../modal/modal.delete.risk.assess.component'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faTrashAlt,
     faChartBar,
     faEdit,
     faPlus
 } from '@fortawesome/free-solid-svg-icons'
-import ModalEditRiskAssess from '../modal/modal.edit.risk.assess.component'
-import ModalRiskLevel from '../modal/modal.risk.level.component'
-import ModalDeleteRiskAssess from '../modal/modal.delete.risk.assess.component'
+
 library.add(
     faTrashAlt,
     faChartBar,
@@ -189,36 +193,38 @@ class RiskAssessmentsList extends Component {
                     </tr>
                 }
                 Loader={
-                    <div className="sweet-loading pt-2 ps-1">
-                        <ClipLoader color={this.state.color} loading={this.state.loader.loading} size={24} />
-                    </div>
+                    <tr>
+                        <td className="sweet-loading pt-2 ps-1" style={{ borderBottom: "none", padding: "0px" }}>
+                            <ClipLoader color={this.state.color} loading={this.state.loader.loading} size={24} />
+                        </td>
+                    </tr>
                 }
                 Body={
                     this.state.riskassessList.map((riskassess, key) =>
                     (<tr key={key}>
-                        <th>{key + 1}</th>
+                        <th>{key + 1}.</th>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.title}>{riskassess.title}</td>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.address}>{riskassess.address}</td>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.city}>{riskassess.city}</td>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.region}>{riskassess.region}</td>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.description}>{riskassess.description}</td>
                         <td>
-                            <OverlayTrigger
-                                trigger={'click'}
-                                rootClose={true}
-                                key={'top'}
-                                placement={'top'}
-                                overlay={
-                                    <Popover>
-                                        <Popover.Content>
-                                            <a href="#" className="text-dark p-2" onClick={() => this.showModal_delete(riskassess)} title="Delete"><FontAwesomeIcon icon="trash-alt" /></a>
-                                            <a href="#" className="p-2 text-dark" onClick={() => this.getRiskLevel(riskassess._id)} title="Risk Levels"><FontAwesomeIcon icon="chart-bar" /></a>
-                                            <a href="#" className="p-2 text-dark" onClick={() => this.Edit(riskassess._id)} title="Edit"><FontAwesomeIcon icon="edit" /></a>
-                                        </Popover.Content>
-                                    </Popover>
-                                }>
-                                <a href="#" className="text-muted p-2 ellipsis" id={`Popover${key + 1}`}><FontAwesomeIcon icon="ellipsis-h" /></a>
-                            </OverlayTrigger>
+                            <Tippy
+                                offset={[0, -3]}
+                                interactive={true}
+                                animation="scale"
+                                placement="top"
+                                trigger="click"
+                                content={
+                                    <div className="pt-2 pb-2">
+                                        <a href="#" className="text-white p-2" onClick={() => this.showModal_delete(riskassess)} title="Delete"><FontAwesomeIcon icon="trash-alt" /></a>
+                                        <a href="#" className="text-white p-2" onClick={() => this.getRiskLevel(riskassess._id)} title="Risk Levels"><FontAwesomeIcon icon="chart-bar" /></a>
+                                        <a href="#" className="text-white p-2" onClick={() => this.Edit(riskassess._id)} title="Edit"><FontAwesomeIcon icon="edit" /></a>
+                                    </div>
+                                }
+                            >
+                                <a href="#" className="text-muted p-2" id={`Popover${key + 1}`}><FontAwesomeIcon icon="ellipsis-h" /></a>
+                            </Tippy>
                         </td>
                     </tr>)
                     )
@@ -522,7 +528,7 @@ class RiskAssessmentsList extends Component {
                             items={this.GetSearchItems()}
                             onselect={this.OnSelect}
                             onclear={this.OnClear}
-                            fuseoptions={{ keys: ["name", "title", "address", "city", "region"] }}
+                        // fuseoptions={{ keys: ["name", "title", "address", "city", "region"] }}
                         />
                     </div>
                     <div className="col" style={{ textAlign: "end" }}>
