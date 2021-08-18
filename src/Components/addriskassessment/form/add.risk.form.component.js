@@ -17,7 +17,7 @@ export default class AddRiskForm extends Component {
             empty: null,
             loader: false,
         }
-        
+
     }
 
     // Add Risk Level
@@ -154,9 +154,9 @@ export default class AddRiskForm extends Component {
             }
             return (<div className="p-3 fs-3 col-6 mx-auto d-flex justify-content-center">
                 <button onClick={AddRiskAssess} type="submit" className="btn_ btn-purple w-50">
-                <ClipLoader color={'#fff'} loading={this.state.loader} size={10} />
-                   &nbsp; Submit &nbsp;
-                     </button>
+                    <ClipLoader color={'#fff'} loading={this.state.loader} size={10} />
+                    &nbsp; Submit &nbsp;
+                </button>
             </div>)
         }
         return (<div>
