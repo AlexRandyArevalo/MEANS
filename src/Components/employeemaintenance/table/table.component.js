@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Search from '../../../Components/searchbox/search.component'
-import { Modal, OverlayTrigger, Popover } from "react-bootstrap"
+import { Modal } from "react-bootstrap"
+import Tippy from '@tippyjs/react';
+import "tippy.js/dist/tippy.css";
+import 'tippy.js/animations/scale.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ClipLoader } from "react-spinners"
@@ -311,11 +314,11 @@ class EmployeeList extends Component {
                             items={this.GetSearchItems()}
                             onselect={this.OnSelect}
                             onclear={this.OnClear}
-                            fuseoptions={{ keys: ["lName", "fName", "contact", "address"] }}
+                        // fuseoptions={{ keys: ["lName", "fName", "contact", "address"] }}
                         />
                     </div>
                     <div className="col" style={{ textAlign: "end" }}>
-                        <button type="button" className="btn_ btn-purple w-25" onClick={this.showModal}><FontAwesomeIcon icon="user-plus" /> &nbsp;Add</button>
+                        <button type="button" className="btn_ btn-purple w-25" onClick={this.props.add_emp_modal}><FontAwesomeIcon icon="user-plus" /> &nbsp;Add</button>
                     </div>
                 </div>
                 <div className="shadow-sm p-3 mb-5 bg-body rounded mt-3">
@@ -335,36 +338,38 @@ class EmployeeList extends Component {
                                 </tr>
                             }
                             Loader={
-                                <div className="sweet-loading pt-2 ps-1">
-                                    <ClipLoader color={this.state.color} loading={this.state.loader.loading} size={24} />
-                                </div>
+                                <tr>
+                                    <td className="sweet-loading pt-2 ps-1" style={{ borderBottom: "none", padding: "0px" }}>
+                                        <ClipLoader color={this.state.color} loading={this.state.loader.loading} size={24} />
+                                    </td>
+                                </tr>
                             }
                             Body={
                                 this.state.employees.map((emp, index) =>
                                 (<tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td className="text-truncate td-mw-12" title={emp.eid}>{this.state.employees[index].eid}</td>
-                                    <td className="text-truncate td-mw-12" title={emp.lName}>{this.state.employees[index].lName}</td>
-                                    <td className="text-truncate td-mw-12" title={emp.fName}>{this.state.employees[index].fName}</td>
-                                    <td className="text-truncate td-mw-12" title={emp.mName}>{this.state.employees[index].mName}</td>
-                                    <td className="text-truncate td-mw-12" title={emp.contact}>{this.state.employees[index].contact}</td>
-                                    <td className="text-truncate td-mw-12" title={emp.address}>{this.state.employees[index].address}</td>
+                                    <th>{index + 1}.</th>
+                                    <td className="text-truncate td-mw-12 text-muted" title={emp.eid}>{this.state.employees[index].eid}</td>
+                                    <td className="text-truncate td-mw-12 text-muted" title={emp.lName}>{this.state.employees[index].lName}</td>
+                                    <td className="text-truncate td-mw-12 text-muted" title={emp.fName}>{this.state.employees[index].fName}</td>
+                                    <td className="text-truncate td-mw-12 text-muted" title={emp.mName}>{this.state.employees[index].mName}</td>
+                                    <td className="text-truncate td-mw-12 text-muted" title={emp.contact}>{this.state.employees[index].contact}</td>
+                                    <td className="text-truncate td-mw-12 text-muted" title={emp.address}>{this.state.employees[index].address}</td>
                                     <td>
-                                        <OverlayTrigger
-                                            trigger={'click'}
-                                            rootClose={true}
-                                            key={'top'}
-                                            placement={'top'}
-                                            overlay={
-                                                <Popover>
-                                                    <Popover.Content>
-                                                        <a href="#" className="text-dark p-2" onClick={() => this.showModal_delete(emp)}><FontAwesomeIcon icon="trash-alt" /></a>
-                                                        <a href="#" className="text-dark p-2" onClick={() => this.Edit(emp._id)}><FontAwesomeIcon icon="edit" /></a>
-                                                    </Popover.Content>
-                                                </Popover>
-                                            }>
-                                            <a href="#" className="text-muted p-2 ellipsis" id={`Popover${index + 1}`}><FontAwesomeIcon icon="ellipsis-h" /></a>
-                                        </OverlayTrigger>
+                                        <Tippy
+                                            offset={[0,-3]}
+                                            interactive={true}
+                                            animation="scale"
+                                            placement="top"
+                                            trigger="click"
+                                            content={
+                                                <div className="pt-2 pb-2">
+                                                    <a href="#" className="text-white p-2" onClick={() => this.showModal_delete(emp)}><FontAwesomeIcon icon="trash-alt" /></a>
+                                                    <a href="#" className="text-white p-2" onClick={() => this.Edit(emp._id)}><FontAwesomeIcon icon="edit" /></a>
+                                                </div>
+                                            }
+                                        >
+                                            <a href="#" className="text-muted p-2" id={`Popover${index + 1}`}><FontAwesomeIcon icon="ellipsis-h" /></a>
+                                        </Tippy>
                                     </td>
                                 </tr>)
                                 )
