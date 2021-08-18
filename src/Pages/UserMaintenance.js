@@ -1,5 +1,5 @@
 import React from "react";
-import UserForm from "../Components/usermaintenance/usermaintenance.component/user.form.component"
+import UserForm from "../Components/usermaintenance/user.form/user.form.component"
 
 
 function UserMaintenance() {

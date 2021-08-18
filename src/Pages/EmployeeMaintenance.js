@@ -39,6 +39,20 @@ export default class EmployeeMaintenance extends Component {
         })
     }
 
+    getTemplate = () => {
+        axios.get('/employees/excelFormat')
+            .then((res) => {
+                const url = window.URL.createObjectURL(new Blob([res.data], { type: 'text/csv; charset=utf-8' }));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'MEANS_EMPLOYEE_LIST_FORMAT.csv');
+                document.body.appendChild(link);
+                link.click();
+            }, (err) => {
+
+            });
+    }
+
     Form = () => {
         return (<div className="row m-3">
             <div className="col-md-7 mb-2">
@@ -65,6 +79,10 @@ export default class EmployeeMaintenance extends Component {
         </div>)
     }
 
+    refreshTable = () => {
+        this.elemRef.current.setDataTable()
+    }
+
     render() {
         const Footer = () => {
             const { addToast } = useToasts()
@@ -81,7 +99,7 @@ export default class EmployeeMaintenance extends Component {
                 // console.log(jsonData)
                 axios.post('/saveEmployee', jsonData)
                     .then((res) => {
-                        this.elemRef.current.setDataTable()
+                        this.refreshTable()
                         this.hideModal()
                         addToast(res.data.msg, {
                             appearance: 'success',
@@ -111,23 +129,24 @@ export default class EmployeeMaintenance extends Component {
                     <hr />
                     <div className="container">
                         <div className="col-md-12 d-flex mt-4 emp-main">
-                            <UploadCsv />
+                            <UploadCsv template={this.getTemplate} reloadtable={this.refreshTable} />
                             <div className="col-md-9 employee-list">
-                                <div className="p-3">
-                                    <EmployeeList ref={this.elemRef} />
+                                <div className="p-3 pt-1">
+                                    <EmployeeList add_emp_modal={this.showModal} ref={this.elemRef} />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <AddEmployee
-                        show={this.state.isopen}
-                        hidemodal={this.hideModal}
-                        saveemployee={this.saveEmployee}
-                        form={this.Form()}
-                        footer={<Footer />}
-                    />
                 </div>
-            </ToastProvider>)
+                <AddEmployee
+                    show={this.state.isopen}
+                    hidemodal={this.hideModal}
+                    saveemployee={this.saveEmployee}
+                    form={this.Form()}
+                    footer={<Footer />}
+                />
+            </ToastProvider>
+        )
 
     }
 }
