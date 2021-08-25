@@ -72,7 +72,7 @@ export default class UserForm extends Component {
         return (
             <ToastProvider>
                 <div className="shadow-sm p-3 mb-4 bg-body rounded mt-4">
-                    <h5 className="pb-3">Application Form</h5>
+                    <h5 className="p-4 pb-0"> Application Form</h5>
                     <div className="row m-3">
                         <div className="col-md-7">
                             <input onChange={this.hasChanges.bind(this, 'eid')} value={this.state.eid} type="email" className="form-control" placeholder="E.I.D" required />

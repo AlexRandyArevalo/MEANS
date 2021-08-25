@@ -129,3 +129,12 @@
 .fs-13 {
     font-size: 13px;
 }
+
+/* Loader */
+.loader {
+    position: absolute;
+    left: 57%;
+    top: 48%;
+    height: 31px;
+    width: auto;
+}

@@ -6,13 +6,19 @@ export default class DropDown extends Component {
         risklist: []
     }
     componentDidMount = () => {
-        this.getRiskAssessData()
+        this.getRiskAssessData()        
     }
     getRiskAssessData = () => {
-        axios.get('/riskAssessments/')
+        axios.get('/riskAssessments')
             .then((res) => {
                 if (res.data.status) {
-                    this.setState({ risklist: res.data.data })
+                    this.setState({
+                        risklist: res.data.data,
+                    })
+                    setTimeout(() => {
+                        let id = document.getElementById('_risklist').value;
+                        this.props.loaddefault(id)
+                    }, 100);
                 }
             }, (err) => {
                 console.log(err.message)
@@ -31,8 +37,7 @@ export default class DropDown extends Component {
         return (<div>
             <div className="card-header p-3 d-flex align-self-center bg-white">
                 <div className="col-md-6 align-self-center">
-                    <select className="form-select w-50" defaultValue="default" onChange={this.props.selectedrisk}>
-                        <option value="default">Please select</option>
+                    <select id="_risklist" className="form-select w-50" onChange={this.props.selectedrisk}>
                         {this.RiskAssessList()}
                     </select>
                 </div>

@@ -1,36 +1,45 @@
 import './style.css'
 import logo from '../../Assets/images/acn-logo.svg';
-import swal from 'sweetalert'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { ToastProvider, useToasts } from 'react-toast-notifications'
+import axios from 'axios';
+import { ClipLoader } from "react-spinners";
 
 function LoginForm() {
-    // User Input
-    const [eid, setUser] = useState('alex@accenture.com')
-    const [pass, setPass] = useState('111')
+    const [eid, setUser] = useState('arux.randy.arevalo')
+    const [password, setPass] = useState('pw@1234')
+    const [loader, setLoader] = useState(false)
 
     const history = useHistory();
-
-    // Validate Input Data
-    const handleValidate = (e) => {
-        e.preventDefault()
-        if (eid === 'alex@accenture.com' && pass === '111')
-            history.push('/')
-        else
-            swal("Wrong Credentials", "Please try again", "error")
-    }
 
     const SubmitButton = () => {
         const { addToast } = useToasts()
         const Login = () => {
-            addToast(`This is your username and password [${eid}, ${pass}]`, {
-                appearance: 'success',
-                autoDismiss: true,
-            })
+            setLoader(true)
+            let jsonData = {
+                eid: eid,
+                password: password,
+            }
+            axios.post('/login', jsonData)
+                .then(res => {
+                    window.token = res.data.token
+                    window.name = res.data.name
+                    setLoader(false)
+                    history.push('/')
+                }).catch(err => {
+                    addToast('Incorrect eid or password.', {
+                        appearance: 'error',
+                        autoDismiss: true,
+                    })
+                    setLoader(false)
+                })
         }
         return (
-            <button onClick={Login} className="btn_ btn-purple mb-4 w-100">Submit</button>
+            <button onClick={Login} className="btn_ btn-purple mb-4 w-100">
+                <ClipLoader color={'#fff'} loading={loader} size={10} />
+                &nbsp; Login &nbsp;
+            </button>
         )
     }
 
@@ -39,10 +48,10 @@ function LoginForm() {
             <div className="col-md-4 mx-auto bg-light p-5 rounded">
                 <h1 className="pb-4">MEANS</h1>
                 <div className="mb-4">
-                    <input onChange={(e) => setUser(e.target.value)} type="email" value={eid} className="form-control" placeholder="*EID" />
+                    <input onChange={(e) => setUser(e.target.value)} type="text" value={eid} className="form-control" placeholder="*EID" />
                 </div>
                 <div className="mb-4">
-                    <input onChange={(e) => setPass(e.target.value)} type="password" value={pass} className="form-control" placeholder="*Password" />
+                    <input onChange={(e) => setPass(e.target.value)} type="password" value={password} className="form-control" placeholder="*Password" />
                 </div>
                 <SubmitButton />
                 <div className="d-flex justify-content-center">

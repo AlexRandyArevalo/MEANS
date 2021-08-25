@@ -29,6 +29,9 @@ function Menu() {
         <nav id="sidebar">
             <ul className="list-unstyled components">
                 <p>&nbsp;</p>
+                {/* <li>
+                    <Link className="ps-5 my-link " to="/"><FontAwesomeIcon icon="tachometer-alt" /> &nbsp;Dashboard</Link>
+                </li> */}
                 <li>
                     <Link className="ps-5 my-link " to="/"><FontAwesomeIcon icon="tachometer-alt" /> &nbsp;Dashboard</Link>
                 </li>
@@ -38,9 +41,9 @@ function Menu() {
                 <li>
                     <Link className="ps-5 my-link" to="/employeemaintenance"><FontAwesomeIcon icon="tools" /> &nbsp;Employee Maintenance</Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link className="ps-5 my-link" to="/statisticreports"><FontAwesomeIcon icon="chart-line" /> &nbsp;Statistic Reports</Link>
-                </li>
+                </li> */}
                 <li>
                     <Link className="ps-5 my-link" to="/usermaintenance"><FontAwesomeIcon icon="user-cog" /> &nbsp;User Maintenance</Link>
                 </li>

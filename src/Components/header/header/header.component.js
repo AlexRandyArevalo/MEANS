@@ -21,10 +21,10 @@ function Header() {
             <div className="navbar-collapse justify-content-end means-user" style={{ paddingRight: "70px" }}>
                 <ul className="navbar-nav">
                     <li className="nav-item" style={{ marginRight: "-14px", position:"relative" }}>
-                        <img src={logo} className="rounded-circle" />
+                        <img src={logo} className="rounded-circle" alt="logo" />
                     </li>
                     <li className="nav-item align-self-center">
-                        <span className="nav-link" style={{width:"100%"}}>User here</span>
+                        <span className="nav-link" style={{width:"100%"}}>{window.name}</span>
                     </li>
                     <li className="nav-item d-flex last-child">
                         <span className="vLine"></span>

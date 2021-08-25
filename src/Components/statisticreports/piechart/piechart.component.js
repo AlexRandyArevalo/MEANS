@@ -1,49 +1,54 @@
 import { Component } from "react";
 import { Pie } from "react-chartjs-2";
+import { BeatLoader } from "react-spinners"
 
 export default class PieChart extends Component {
     state = {
-        affected: {grandTotal:5, max:65, min:35},
-        responds: {grandTotal:20, max:70, min:30},
+        color_green: "#36d7b7",
+        loader: true,
+        ishidden: true,
+        affected: [],
+        responds: [],
         Data_I: {},
         Data_II: {},
     }
 
     componentDidMount = () => {
+        this.setState({ loader: true })
         this.loadPieChart()
     }
 
     BGColor_I = () => {
         return ([
-            '#e35d6a',//red
+            '#36d7b7', //green
+            '#ea868f',//red
             '#8540f5',//indigo
-            '#3d8bfd', //blue
-            // '#de5c9d',//pink
-            // '#8c68cd',//purple
+            '#de5c9d',//pink
+            '#8c68cd',//purple
         ])
     }
     affectedData = () => {
+        let totalemps = this.state.affected.totalEmployees;
+        let totalaff = this.state.affected.totalAffected;
         return ([
-            this.state.affected.grandTotal,
-            this.state.affected.max,
-            this.state.affected.min,
+            totalemps,
+            totalaff,
         ])
     }
 
     BGColor_II = () => {
         return ([
-            '#3dd5f3',//cyan
+            '#6ea8fe', //blue
+            '#ffda6a',//yellow
             '#4dd4ac',//teal
+            '#3dd5f3',//cyan
             '#ced4da',//gray
-            // '#ffcd39',//yellow
-            // '#fd9843', //orange
         ])
     }
     repondsData = () => {
         return ([
-            this.state.responds.grandTotal,
-            this.state.responds.max,
-            this.state.responds.min,
+            this.state.responds.totalAffected,
+            this.state.responds.totalResponds,
         ])
     }
 
@@ -52,44 +57,51 @@ export default class PieChart extends Component {
             affected: data.affected,
             responds: data.responds,
         })
-        console.log(data)
         this.loadPieChart()
     }
+
     loadPieChart = () => {
         this.setState({
             Data_I: {
-                // labels: [
-                //     'Total Affected',
-                //     'max',
-                //     'min'
-                // ],
+                labels: [
+                    'Not Affected',
+                    'Affected'
+                ],
                 datasets: [{
                     data: this.affectedData(),
                     backgroundColor: this.BGColor_I,
-                    hoverOffset: 4
+                    hoverOffset: 4,
                 }]
             },
             Data_II: {
-                // labels: [
-                //     'Total Reponses',
-                //     'max',
-                //     'min'
-                // ],
+                labels: [
+                    'Total Employees',
+                    'Responds'
+                ],
                 datasets: [{
                     data: this.repondsData(),
                     backgroundColor: this.BGColor_II,
-                    hoverOffset: 4
+                    hoverOffset: 4,
                 }]
             }
         })
     }
+    changeState = () => {
+        this.setState({
+            loader: false,
+            ishidden: false,
+        })
+    }
     render() {
         return (<div className="col-md-12 d-flex means-pie-chart">
-            <div className="col-md-4 means-pie-chart-I p-4 mx-auto">
-                <Pie data={this.state.Data_I} />
+            <div className="loader">
+                <BeatLoader color={this.state.color_green} loading={this.state.loader} size={15} />
             </div>
-            <div className="col-md-4 means-pie-chart-II p-4 mx-auto">
-                <Pie data={this.state.Data_II} />
+            <div className="col-md-4 means-pie-chart-II p-4 mx-auto" >
+                <Pie data={this.state.Data_II} hidden={this.state.ishidden} />
+            </div>
+            <div className="col-md-4 means-pie-chart-I p-4 mx-auto" style={{ height: "46vh" }} >
+                <Pie data={this.state.Data_I} hidden={this.state.ishidden} />
             </div>
         </div>)
     }

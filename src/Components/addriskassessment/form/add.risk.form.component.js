@@ -16,6 +16,7 @@ export default class AddRiskForm extends Component {
             risklevelList: [],
             empty: null,
             loader: false,
+            rl_isHidden: true,
         }
 
     }
@@ -27,10 +28,11 @@ export default class AddRiskForm extends Component {
             risklevel: this.state.risklevel,
             def: this.state.def,
         })
-        this.setState({ empty: null })
         this.setState({
+            empty: null,
             risklevel: "",
             def: "",
+            rl_isHidden: false,
         })
     }
 
@@ -38,23 +40,26 @@ export default class AddRiskForm extends Component {
     getRisLevelList = () => {
         if (!this.state.risklevelList) return null
         return (
-            <Table
-                Header={
-                    <tr>
-                        <th width="5%">#</th>
-                        <th width="35%">Risk Level</th>
-                        <th width="60%">Definition</th>
-                    </tr>
-                }
-                Body={
-                    this.state.risklevelList.map((risklevel, key) =>
-                    (<tr key={key}>
-                        <th className="text-muted">{key + 1}</th>
-                        <td className="text-muted">{risklevel.risklevel}</td>
-                        <td className="text-muted">{risklevel.def}</td>
-                    </tr>)
-                    )
-                } />
+            <div className="bg-white p-4 border rounded">
+                <Table
+                    class={'table'}
+                    Header={
+                        <tr>
+                            <th width="5%">#</th>
+                            <th width="35%">Risk Level</th>
+                            <th width="60%">Definition</th>
+                        </tr>
+                    }
+                    Body={
+                        this.state.risklevelList.map((risklevel, key) =>
+                        (<tr key={key}>
+                            <th className="text-muted">{key + 1}</th>
+                            <td className="text-muted">{risklevel.risklevel}</td>
+                            <td className="text-muted">{risklevel.def}</td>
+                        </tr>)
+                        )
+                    } />
+            </div>
         )
     }
 
@@ -69,39 +74,50 @@ export default class AddRiskForm extends Component {
         return (<div>
             <div className="col-md-12 d-flex">
                 <div className="col-md-6 p-3">
-                    <input onChange={this.hasChanges.bind(this, 'title')} value={this.state.title} name="title" type="text" className="form-control" placeholder="Title" required />
+                    <label className="pb-1 fw-bold fs-13">Title</label>
+                    <input onChange={this.hasChanges.bind(this, 'title')} value={this.state.title} name="title" type="text" className="form-control" placeholder="Enter title" required />
                 </div>
                 <div className="col-md-6 p-3">
-                    <input onChange={this.hasChanges.bind(this, 'address')} value={this.state.address} name="address" type="text" className="form-control" placeholder="Address" required />
+                    <label className="pb-1 fw-bold fs-13">Address</label>
+                    <input onChange={this.hasChanges.bind(this, 'address')} value={this.state.address} name="address" type="text" className="form-control" placeholder="Enter your address" required />
                 </div>
             </div>
             <div className="col-md-12 d-flex">
                 <div className="col-md-6 p-3">
-                    <input onChange={this.hasChanges.bind(this, 'city')} value={this.state.city} name="city" type="text" className="form-control" placeholder="City" required />
+                    <label className="pb-1 fw-bold fs-13">City</label>
+                    <input onChange={this.hasChanges.bind(this, 'city')} value={this.state.city} name="city" type="text" className="form-control" placeholder="Enter your city" required />
                 </div>
                 <div className="col-md-6 p-3">
-                    <input onChange={this.hasChanges.bind(this, 'region')} value={this.state.region} name="region" type="text" className="form-control" placeholder="Region" required />
-                </div>
-            </div>
-            <div className="col-md-12 mb-5">
-                <div className="col p-3">
-                    <textarea onChange={this.hasChanges.bind(this, 'desc')} value={this.state.desc} name="desc" className="form-control" rows="3" placeholder="Description" required></textarea>
+                    <label className="pb-1 fw-bold fs-13">Region</label>
+                    <input onChange={this.hasChanges.bind(this, 'region')} value={this.state.region} name="region" type="text" className="form-control" placeholder="Enter your region" required />
                 </div>
             </div>
             <div className="col-md-12">
-                <h5 className="ps-3">Risk Levels</h5>
-                <div className="col-md-12 d-flex add-risk">
-                    <div className="col-md-4 p-3 align-self-center add-risk-list">
-                        <input onChange={this.hasChanges.bind(this, 'risklevel')} value={this.state.risklevel} name="risklevel" type="text" className="form-control w-100 risk-level-field" placeholder="Risk Assessment Level" />
+                <div className="col p-3">
+                    <label className="pb-1 fw-bold fs-13">Description</label>
+                    <textarea onChange={this.hasChanges.bind(this, 'desc')} value={this.state.desc} name="desc" className="form-control" rows="3" placeholder="Enter description" required></textarea>
+                </div>
+            </div>
+            <div className="col-md-12">
+                <div className="bg-light p-4 m-3 border rounded">
+                    <h5 className="ps-3">Risk Levels</h5>
+                    <div className="col-md-12 d-flex add-risk">
+                        <div className="col-md-4 p-3 align-self-center add-risk-list">
+                            <label className="pb-1 fw-bold fs-13">Risk Assessment Level</label>
+                            <input onChange={this.hasChanges.bind(this, 'risklevel')} value={this.state.risklevel} name="risklevel" type="text" className="form-control w-100 risk-level-field" placeholder="Enter risk level" />
+                        </div>
+                        <div className="col-md-6 p-3 align-self-center add-risk-list">
+                            <label className="pb-1 fw-bold fs-13">Definition</label>
+                            <input onChange={this.hasChanges.bind(this, 'def')} value={this.state.def} name="def" type="text" className="form-control w-100 risk-level-field" placeholder="Enter definition" />
+                        </div>
+                        <div className="col-md-2 p-3 align-self-center add-risk-list" style={{ textAlign: "end" }}>
+                            <button onClick={this.AddRiskLevel} type="button" className="btn_ btn-purple w-100"><FontAwesomeIcon icon="plus" /> Add</button>
+                        </div>
                     </div>
-                    <div className="col-md-6 p-3 align-self-center add-risk-list">
-                        <input onChange={this.hasChanges.bind(this, 'def')} value={this.state.def} name="def" type="text" className="form-control w-100 risk-level-field" placeholder="Definition" />
-                    </div>
-                    <div className="col-md-2 p-3 align-self-center add-risk-list" style={{ textAlign: "end" }}>
-                        <button onClick={this.AddRiskLevel} type="button" className="btn_ btn-purple w-100"><FontAwesomeIcon icon="plus" /> Add</button>
+                    <div className="p-3" hidden={this.state.rl_isHidden}>
+                        {this.getRisLevelList()}
                     </div>
                 </div>
-                {this.getRisLevelList()}
             </div>
         </div>)
     }

@@ -27,17 +27,17 @@ export default class UploadCsv extends Component {
     // Handle CSV Data On Upload
     handleData = (data, info) => {
         let obj = []
-        data.map(res=>{
+        data.map(res => (
             obj.push({
-                eid:res.eid,
-                phoneno:res.contact,
-                lname:res.last_name,
-                fname:res.first_name,
-                mname:res.middle_name,
-                addr:res.address,
-                workflow:res.workflow,
+                eid: res.eid,
+                phoneno: res.contact,
+                lname: res.last_name,
+                fname: res.first_name,
+                mname: res.middle_name,
+                addr: res.address,
+                workflow: res.workflow,
             })
-        })
+        ))
         this.setState({
             csvData: obj
         })
@@ -50,7 +50,7 @@ export default class UploadCsv extends Component {
         const SubmitButton = () => {
             const { addToast } = useToasts()
             const SaveToDB = () => {
-                
+
                 this.setState({ loader: true })
                 axios.post('/saveBulkEmployee', this.state.csvData)
                     .then((res) => {
@@ -85,7 +85,7 @@ export default class UploadCsv extends Component {
                             <div className="text-body">File upload</div>
                         </div>
                         <div className="w-50 text-end">
-                            <a href="#" onClick={this.props.template} className="text-decoration-none" title="CSV Template">
+                            <a href="!#" onClick={this.props.template} className="text-decoration-none" title="CSV Template">
                                 <FontAwesomeIcon icon="file-csv" className="fs-5" />
                             </a>
                         </div>
