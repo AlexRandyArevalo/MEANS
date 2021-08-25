@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Pie } from "react-chartjs-2";
 import { BeatLoader } from "react-spinners"
+import AddEmployee from "../../employeemaintenance/modal/modal.add.employee.component";
 
 export default class PieChart extends Component {
     state = {
@@ -28,11 +29,9 @@ export default class PieChart extends Component {
         ])
     }
     affectedData = () => {
-        let totalemps = this.state.affected.totalEmployees;
-        let totalaff = this.state.affected.totalAffected;
         return ([
-            totalemps,
-            totalaff,
+            this.state.affected.totalEmployees,
+            this.state.affected.totalAffected,
         ])
     }
 
@@ -71,6 +70,14 @@ export default class PieChart extends Component {
                     data: this.affectedData(),
                     backgroundColor: this.BGColor_I,
                     hoverOffset: 4,
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                let Alex_label = context.label + ': ' + context.parsed + '%';
+                                return Alex_label;
+                            }
+                        }
+                    }
                 }]
             },
             Data_II: {
@@ -82,6 +89,14 @@ export default class PieChart extends Component {
                     data: this.repondsData(),
                     backgroundColor: this.BGColor_II,
                     hoverOffset: 4,
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                let Alex_label = context.label + ': ' + context.parsed + '%';
+                                return Alex_label;
+                            }
+                        }
+                    }
                 }]
             }
         })
