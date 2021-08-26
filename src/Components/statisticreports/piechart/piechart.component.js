@@ -1,12 +1,12 @@
 import { Component } from "react";
 import { Pie } from "react-chartjs-2";
 import { BeatLoader } from "react-spinners"
-import AddEmployee from "../../employeemaintenance/modal/modal.add.employee.component";
 
 export default class PieChart extends Component {
     state = {
         color_green: "#36d7b7",
         loader: true,
+        beatloader_toggle: false,
         ishidden: true,
         affected: [],
         responds: [],
@@ -52,6 +52,7 @@ export default class PieChart extends Component {
     }
 
     loadData = (data) => {
+        console.log(data)
         this.setState({
             affected: data.affected,
             responds: data.responds,
@@ -62,10 +63,6 @@ export default class PieChart extends Component {
     loadPieChart = () => {
         this.setState({
             Data_I: {
-                labels: [
-                    'Not Affected',
-                    'Affected'
-                ],
                 datasets: [{
                     data: this.affectedData(),
                     backgroundColor: this.BGColor_I,
@@ -73,7 +70,8 @@ export default class PieChart extends Component {
                     tooltip: {
                         callbacks: {
                             label: function (context) {
-                                let Alex_label = context.label + ': ' + context.parsed + '%';
+                                let labeltext = ['Not Affected', 'Affected']
+                                let Alex_label = labeltext[context.dataIndex] + ': ' + context.parsed + '%';
                                 return Alex_label;
                             }
                         }
@@ -81,10 +79,6 @@ export default class PieChart extends Component {
                 }]
             },
             Data_II: {
-                labels: [
-                    'Total Employees',
-                    'Responds'
-                ],
                 datasets: [{
                     data: this.repondsData(),
                     backgroundColor: this.BGColor_II,
@@ -92,7 +86,8 @@ export default class PieChart extends Component {
                     tooltip: {
                         callbacks: {
                             label: function (context) {
-                                let Alex_label = context.label + ': ' + context.parsed + '%';
+                                let labeltext = ['Total Employees', 'Responds']
+                                let Alex_label = labeltext[context.dataIndex] + ': ' + context.parsed + '%';
                                 return Alex_label;
                             }
                         }
@@ -105,19 +100,42 @@ export default class PieChart extends Component {
         this.setState({
             loader: false,
             ishidden: false,
+            beatloader_toggle: true,
         })
     }
     render() {
-        return (<div className="col-md-12 d-flex means-pie-chart">
-            <div className="loader">
-                <BeatLoader color={this.state.color_green} loading={this.state.loader} size={15} />
-            </div>
-            <div className="col-md-4 means-pie-chart-II p-4 mx-auto" >
-                <Pie data={this.state.Data_II} hidden={this.state.ishidden} />
-            </div>
-            <div className="col-md-4 means-pie-chart-I p-4 mx-auto" style={{ height: "46vh" }} >
-                <Pie data={this.state.Data_I} hidden={this.state.ishidden} />
-            </div>
-        </div>)
+        return (
+            <div className="border rounded m-4">
+                <div className="col-md-12 d-flex means-pie-chart">
+                    <div className="col-md-12" hidden={this.state.beatloader_toggle}>
+                        <div className=" d-flex justify-content-center" style={{ paddingTop: "15%" }}>
+                            <BeatLoader color={this.state.color_green} loading={this.state.loader} size={15} />
+                        </div>
+                    </div>
+                    <div className="col-md-6 d-flex means-pie-chart-II ms-4">
+                        <div className="text-center my-auto p-3" hidden={this.state.ishidden}>
+                            <span className="fw-bold fs-5 pb-4" style={{ color: `${this.BGColor_II()[0]}` }}>{this.state.responds.totalAffected}%</span>
+                            <p className="fs-13 text-muted mb-5">Total Employees</p>
+                            <span className="fw-bold fs-5" style={{ color: `${this.BGColor_II()[1]}` }}>{this.state.responds.totalResponds}%</span>
+                            <p className="fs-13 text-muted">Responds</p>
+                        </div>
+                        <div className="col-md-9 p-5">
+                            <Pie data={this.state.Data_II} />
+                        </div>
+                    </div>
+                    <div className="col-md-6 d-flex means-pie-chart-I">
+                        <div className="text-center my-auto p-3" hidden={this.state.ishidden}>
+                            <span className="fw-bold fs-5 pb-4" style={{ color: `${this.BGColor_I()[0]}` }}>{this.state.affected.totalEmployees}%</span>
+                            <p className="fs-13 text-muted mb-5">Not Affected</p>
+                            <span className="fw-bold fs-5" style={{ color: `${this.BGColor_I()[1]}` }}>{this.state.affected.totalAffected}%</span>
+                            <p className="fs-13 text-muted">Affected</p>
+                        </div>
+                        <div className="col-md-9 p-5">
+                            <Pie data={this.state.Data_I} />
+                        </div>
+                    </div>
+                </div>
+            </div >
+        )
     }
 }

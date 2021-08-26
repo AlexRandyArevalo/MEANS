@@ -35,7 +35,7 @@ export default class DropDown extends Component {
 
     render() {
         return (<div>
-            <div className="card-header p-3 d-flex align-self-center bg-white">
+            <div className="p-4 pb-0 d-flex align-self-center bg-white">
                 <div className="col-md-6 align-self-center">
                     <select id="_risklist" className="form-select w-50" onChange={this.props.selectedrisk}>
                         {this.RiskAssessList()}
