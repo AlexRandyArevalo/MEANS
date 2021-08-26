@@ -72,50 +72,53 @@ export default class AddRiskForm extends Component {
 
     Form = () => {
         return (<div>
-            <div className="col-md-12 d-flex">
-                <div className="col-md-6 p-3">
-                    <label className="pb-1 fw-bold fs-13 ps-1">Title</label>
-                    <input onChange={this.hasChanges.bind(this, 'title')} value={this.state.title} name="title" type="text" className="form-control" placeholder="Enter title" required />
-                </div>
-                <div className="col-md-6 p-3">
-                    <label className="pb-1 fw-bold fs-13 ps-1">Address</label>
-                    <input onChange={this.hasChanges.bind(this, 'address')} value={this.state.address} name="address" type="text" className="form-control" placeholder="Enter your address" required />
-                </div>
-            </div>
-            <div className="col-md-12 d-flex">
-                <div className="col-md-6 p-3">
-                    <label className="pb-1 fw-bold fs-13 ps-1">City</label>
-                    <input onChange={this.hasChanges.bind(this, 'city')} value={this.state.city} name="city" type="text" className="form-control" placeholder="Enter your city" required />
-                </div>
-                <div className="col-md-6 p-3">
-                    <label className="pb-1 fw-bold fs-13 ps-1">Region</label>
-                    <input onChange={this.hasChanges.bind(this, 'region')} value={this.state.region} name="region" type="text" className="form-control" placeholder="Enter your region" required />
-                </div>
-            </div>
-            <div className="col-md-12">
-                <div className="col p-3">
-                    <label className="pb-1 fw-bold fs-13 ps-1">Description</label>
-                    <textarea onChange={this.hasChanges.bind(this, 'desc')} value={this.state.desc} name="desc" className="form-control" rows="3" placeholder="Enter description" required></textarea>
-                </div>
-            </div>
-            <div className="col-md-12">
-                <div className="bg-light p-4 m-3 border rounded">
-                    <h5 className="ps-3">Risk Levels</h5>
-                    <div className="col-md-12 d-flex add-risk">
-                        <div className="col-md-4 p-3 align-self-center add-risk-list">
-                            <label className="pb-1 fw-bold fs-13 ps-1">Risk Assessment Level</label>
-                            <input onChange={this.hasChanges.bind(this, 'risklevel')} value={this.state.risklevel} name="risklevel" type="text" className="form-control w-100 risk-level-field" placeholder="Enter risk level" />
-                        </div>
-                        <div className="col-md-6 p-3 align-self-center add-risk-list">
-                            <label className="pb-1 fw-bold fs-13 ps-1">Definition</label>
-                            <input onChange={this.hasChanges.bind(this, 'def')} value={this.state.def} name="def" type="text" className="form-control w-100 risk-level-field" placeholder="Enter definition" />
-                        </div>
-                        <div className="col-md-2 p-3 align-self-center add-risk-list" style={{ textAlign: "end" }}>
-                            <button onClick={this.AddRiskLevel} type="button" className="btn_ btn-purple w-100"><FontAwesomeIcon icon="plus" /> Add</button>
-                        </div>
+            <div className="border rounded p-4 m-3">
+                <div className="col-md-12 d-flex">
+                    <div className="col-md-6 p-3">
+                        <label className="pb-1 fw-bold fs-13 ps-1">Title</label>
+                        <input onChange={this.hasChanges.bind(this, 'title')} value={this.state.title} name="title" type="text" className="form-control" placeholder="Enter title" required />
                     </div>
-                    <div className="p-3" hidden={this.state.rl_isHidden}>
-                        {this.getRisLevelList()}
+                    <div className="col-md-6 p-3">
+                        <label className="pb-1 fw-bold fs-13 ps-1">Address</label>
+                        <input onChange={this.hasChanges.bind(this, 'address')} value={this.state.address} name="address" type="text" className="form-control" placeholder="Enter your address" required />
+                    </div>
+                </div>
+                <div className="col-md-12 d-flex">
+                    <div className="col-md-6 p-3">
+                        <label className="pb-1 fw-bold fs-13 ps-1">City</label>
+                        <input onChange={this.hasChanges.bind(this, 'city')} value={this.state.city} name="city" type="text" className="form-control" placeholder="Enter your city" required />
+                    </div>
+                    <div className="col-md-6 p-3">
+                        <label className="pb-1 fw-bold fs-13 ps-1">Region</label>
+                        <input onChange={this.hasChanges.bind(this, 'region')} value={this.state.region} name="region" type="text" className="form-control" placeholder="Enter your region" required />
+                    </div>
+                </div>
+                <div className="col-md-12">
+                    <div className="col p-3">
+                        <label className="pb-1 fw-bold fs-13 ps-1">Description</label>
+                        <textarea onChange={this.hasChanges.bind(this, 'desc')} value={this.state.desc} name="desc" className="form-control" rows="3" placeholder="Enter description" required></textarea>
+                    </div>
+                </div>
+
+                <div className="col-md-12">
+                    <div className="bg-light p-4 m-3 border rounded">
+                        <h5 className="ps-3">Risk Levels</h5>
+                        <div className="col-md-12 d-flex add-risk">
+                            <div className="col-md-4 p-3 align-self-center add-risk-list">
+                                <label className="pb-1 fw-bold fs-13 ps-1">Risk Assessment Level</label>
+                                <input onChange={this.hasChanges.bind(this, 'risklevel')} value={this.state.risklevel} name="risklevel" type="text" className="form-control w-100 risk-level-field" placeholder="Enter risk level" />
+                            </div>
+                            <div className="col-md-6 p-3 align-self-center add-risk-list">
+                                <label className="pb-1 fw-bold fs-13 ps-1">Definition</label>
+                                <input onChange={this.hasChanges.bind(this, 'def')} value={this.state.def} name="def" type="text" className="form-control w-100 risk-level-field" placeholder="Enter definition" />
+                            </div>
+                            <div className="col-md-2 p-3 align-self-center add-risk-list" style={{ textAlign: "end" }}>
+                                <button onClick={this.AddRiskLevel} type="button" className="btn_ btn-purple w-100"><FontAwesomeIcon icon="plus" /> Add</button>
+                            </div>
+                        </div>
+                        <div className="p-3" hidden={this.state.rl_isHidden}>
+                            {this.getRisLevelList()}
+                        </div>
                     </div>
                 </div>
             </div>
