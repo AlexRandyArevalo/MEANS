@@ -28,7 +28,7 @@ export default class DropDown extends Component {
         if (!this.state.risklist) return null;
         return (
             this.state.risklist.map((risk, key) =>
-                <option key={key} value={risk._id}>{risk.title}</option>
+                <option className="text-capitalize" key={key} value={risk._id}>{risk.title}</option>
             )
         )
     }
@@ -37,7 +37,7 @@ export default class DropDown extends Component {
         return (<div>
             <div className="p-4 pb-0 d-flex align-self-center bg-white">
                 <div className="col-md-6 align-self-center">
-                    <select id="_risklist" className="form-select w-50" onChange={this.props.selectedrisk}>
+                    <select id="_risklist" className="form-select text-capitalize text-muted w-50" onChange={this.props.selectedrisk}>
                         {this.RiskAssessList()}
                     </select>
                 </div>
