@@ -153,9 +153,9 @@ export default class EditEmployee extends Component {
             }
             return (
                 <Modal.Footer>
-                    <button className="btn btn-outline-secondary" onClick={() => this.hideModal()}>Cancel</button>
-                    <button className="btn btn-outline-success" onClick={UpdateEmployee}>
-                        <ClipLoader color={'#198754'} loading={this.state.loader} size={10} />
+                    <button className="btn btn-secondary" onClick={() => this.hideModal()}>Cancel</button>
+                    <button className="btn btn-success" onClick={UpdateEmployee}>
+                        <ClipLoader color={'#fff'} loading={this.state.loader} size={10} />
                         &nbsp; Save &nbsp;
                     </button>
                 </Modal.Footer>
@@ -163,7 +163,7 @@ export default class EditEmployee extends Component {
         }
         return (
             <ToastProvider>
-                <Modal show={this.state.showHide} size="lg">
+                <Modal show={this.state.showHide} size="lg" className="mt-5">
                     <Modal.Header>
                         <Modal.Title>Edit Employee</Modal.Title>
                     </Modal.Header>

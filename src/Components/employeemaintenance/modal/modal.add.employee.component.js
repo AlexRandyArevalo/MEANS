@@ -94,7 +94,7 @@ export default class AddEmployee extends Component {
         }
         return (
             <ToastProvider>
-                <Modal show={this.state.isopen} onHide={this.hideModal} size="lg">
+                <Modal show={this.state.isopen} onHide={this.hideModal} size="lg" className="mt-5">
                     <Modal.Header>
                         <Modal.Title>Add Employee</Modal.Title>
                     </Modal.Header>
