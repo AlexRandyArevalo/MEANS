@@ -52,7 +52,6 @@ export default class PieChart extends Component {
     }
 
     loadData = (data) => {
-        console.log(data)
         this.setState({
             affected: data.affected,
             responds: data.responds,
@@ -112,25 +111,25 @@ export default class PieChart extends Component {
                             <BeatLoader color={this.state.color_green} loading={this.state.loader} size={15} />
                         </div>
                     </div>
-                    <div className="col-md-6 d-flex means-pie-chart-II ms-4">
-                        <div className="text-center my-auto p-3" hidden={this.state.ishidden}>
+                    <div className="col-md-6 d-flex means-pie-chart-II">
+                        <div className="col-md-4 text-center my-auto" hidden={this.state.ishidden}>
                             <span className="fw-bold fs-5 pb-4" style={{ color: `${this.BGColor_II()[0]}` }}>{this.state.responds.totalAffected}%</span>
                             <p className="fs-13 text-muted mb-5">Total Employees</p>
                             <span className="fw-bold fs-5" style={{ color: `${this.BGColor_II()[1]}` }}>{this.state.responds.totalResponds}%</span>
                             <p className="fs-13 text-muted">Responds</p>
                         </div>
-                        <div className="col-md-9 p-5">
+                        <div className="col-md-8 p-3">
                             <Pie data={this.state.Data_II} />
                         </div>
                     </div>
                     <div className="col-md-6 d-flex means-pie-chart-I">
-                        <div className="text-center my-auto p-3" hidden={this.state.ishidden}>
+                        <div className="col-md-4 text-center my-auto" hidden={this.state.ishidden}>
                             <span className="fw-bold fs-5 pb-4" style={{ color: `${this.BGColor_I()[0]}` }}>{this.state.affected.totalEmployees}%</span>
                             <p className="fs-13 text-muted mb-5">Not Affected</p>
                             <span className="fw-bold fs-5" style={{ color: `${this.BGColor_I()[1]}` }}>{this.state.affected.totalAffected}%</span>
                             <p className="fs-13 text-muted">Affected</p>
                         </div>
-                        <div className="col-md-9 p-5">
+                        <div className="col-md-8 p-3">
                             <Pie data={this.state.Data_I} />
                         </div>
                     </div>

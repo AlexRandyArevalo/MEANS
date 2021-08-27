@@ -6,7 +6,7 @@ export default class DropDown extends Component {
         risklist: []
     }
     componentDidMount = () => {
-        this.getRiskAssessData()        
+        this.getRiskAssessData()
     }
     getRiskAssessData = () => {
         axios.get('/riskAssessments')
@@ -15,10 +15,13 @@ export default class DropDown extends Component {
                     this.setState({
                         risklist: res.data.data,
                     })
-                    setTimeout(() => {
-                        let id = document.getElementById('_risklist').value;
-                        this.props.loaddefault(id)
-                    }, 100);
+                    let id = (this.props._riskid.length <= 0)
+                        ?
+                        res.data.data[this.props._riskid.length]._id
+                        :
+                        this.props._riskid[this.props._riskid.length - 1]
+
+                    this.props.loaddefault(id)
                 }
             }, (err) => {
                 console.log(err.message)
@@ -37,7 +40,7 @@ export default class DropDown extends Component {
         return (<div>
             <div className="p-4 pb-0 d-flex align-self-center bg-white">
                 <div className="col-md-6 align-self-center">
-                    <select id="_risklist" className="form-select text-capitalize text-muted w-50" onChange={this.props.selectedrisk}>
+                    <select className="form-select text-capitalize text-muted w-50" onChange={this.props.selectedrisk}>
                         {this.RiskAssessList()}
                     </select>
                 </div>
