@@ -51,16 +51,16 @@ export default class ModalDeleteRiskAssess extends Component {
                     });
             }
             return (<div className="p-2 mb-3 float-center" style={{ textAlign: "center" }}>
-                <button className="btn btn-outline-secondary me-2" onClick={this.hideModal_delete}>Cancel</button>
-                <button className="btn btn-outline-danger" onClick={Delete}>
-                    <ClipLoader color={'#dc3545'} loading={this.state.loader_del.loading_del} size={10} />
+                <button className="btn btn-secondary me-2" onClick={this.hideModal_delete}>Cancel</button>
+                <button className="btn btn-danger" onClick={Delete}>
+                    <ClipLoader color={'#fff'} loading={this.state.loader_del.loading_del} size={10} />
                     &nbsp; Delete &nbsp;
                 </button>
             </div>)
         }
         return (
             <ToastProvider>
-                <Modal show={this.state.showHide_delete} size="md">
+                <Modal show={this.state.showHide_delete} size="md" className="mt-5">
                     <Modal.Body>
                         <div className="row p-4" style={{ textAlign: "center" }}>
                             <h4 className="text-dark pb-2">You are about to delete <span className="text-primary">{this.state.title}</span>.</h4>

@@ -106,9 +106,9 @@ export default class ModalEditRiskAssess extends Component {
             }
             return (
                 <Modal.Footer>
-                    <button className="btn btn-outline-secondary" onClick={this.RA_hideModal}>Cancel</button>
-                    <button className="btn btn-outline-success" onClick={UpdateRiskAssessment}>
-                        <ClipLoader color={'#198754'} loading={this.state.loader_edit.loading_edit} size={10} />
+                    <button className="btn btn-secondary" onClick={this.RA_hideModal}>Cancel</button>
+                    <button className="btn btn-success" onClick={UpdateRiskAssessment}>
+                        <ClipLoader color={'#fff'} loading={this.state.loader_edit.loading_edit} size={10} />
                         &nbsp; Save &nbsp;
                     </button>
                 </Modal.Footer>
@@ -116,7 +116,7 @@ export default class ModalEditRiskAssess extends Component {
         }
         return (
             <ToastProvider>
-                <Modal show={this.state.RA_isopen} onHide={this.RA_hideModal} size="lg">
+                <Modal show={this.state.RA_isopen} onHide={this.RA_hideModal} size="lg" className="mt-5">
                     <Modal.Header>
                         <Modal.Title>Edit Risk Assessment</Modal.Title>
                     </Modal.Header>

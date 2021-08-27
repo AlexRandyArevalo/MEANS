@@ -94,7 +94,7 @@ export default class ModalUpdateRiskLevel extends Component {
         }
         return (
             <ToastProvider>
-                <Modal show={this.state.showHide_update} size="md">
+                <Modal show={this.state.showHide_update} size="md" className="mt-5">
                     <Modal.Header>
                         <Modal.Title>Update Risk Level</Modal.Title>
                     </Modal.Header>
