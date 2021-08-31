@@ -1,17 +1,24 @@
 import './style.css'
 import logo from '../../Assets/images/acn-logo.svg';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import axios from 'axios';
 import { ClipLoader } from "react-spinners";
+import { useCookies } from 'react-cookie';
 
 function LoginForm() {
     const [eid, setUser] = useState('arux.randy.arevalo')
     const [password, setPass] = useState('pw@1234')
     const [loader, setLoader] = useState(false)
+    const [cookies, setCookie, removeCookie] = useCookies([]);
 
     const history = useHistory();
+
+    useEffect(() => {
+        removeCookie('name')
+        removeCookie('_token')
+    }, [removeCookie])
 
     const SubmitButton = () => {
         const { addToast } = useToasts()
@@ -23,8 +30,8 @@ function LoginForm() {
             }
             axios.post('/login', jsonData)
                 .then(res => {
-                    window.token = res.data.token
-                    window.name = res.data.name
+                    setCookie('name', res.data.name)
+                    setCookie('_token', res.data.token)
                     setLoader(false)
                     history.push('/')
                 }).catch(err => {
@@ -35,6 +42,7 @@ function LoginForm() {
                     setLoader(false)
                 })
         }
+
         return (
             <button onClick={Login} className="btn_ btn-purple mb-4 w-100">
                 <ClipLoader color={'#fff'} loading={loader} size={10} />
