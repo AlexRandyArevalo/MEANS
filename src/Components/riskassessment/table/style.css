@@ -1,0 +1,6 @@
+@media only screen and (max-width: 986px) {
+    /* RISK Assessment */
+    .risk-assess {
+        flex-direction: column !important;
+    }
+}

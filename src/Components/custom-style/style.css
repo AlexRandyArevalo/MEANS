@@ -58,6 +58,29 @@
     background-color: #8003d0 !important;
 }
 
+.btn_outline {
+    border-width: 2px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.35em;
+    /* margin: 10px 1px; */
+    border: solid 1px #9500f359;
+    border-radius: 0% !important;
+    padding: 11px 22px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #9500f3;
+    min-width: 110px !important;
+    text-decoration: none;
+    text-align: center;
+}
+.btn-outline-purple:hover {
+    color: #fff;
+    background-color: #9500f3;
+}
+
+
+
 /* ---------------------------------------------------
     <-BACK BUTTON STYLE
 ----------------------------------------------------- */
@@ -105,4 +128,13 @@
 /* Label */
 .fs-13 {
     font-size: 13px;
+}
+
+/* Loader */
+.loader {
+    position: absolute;
+    left: 57%;
+    top: 48%;
+    height: 31px;
+    width: auto;
 }

@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
-import { Modal, OverlayTrigger, Popover } from "react-bootstrap"
+import { Modal } from "react-bootstrap"
+import Tippy from '@tippyjs/react';
+import "tippy.js/dist/tippy.css";
+import 'tippy.js/animations/scale.css';
 import Table from '../../table.component/table.component'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import { ClipLoader } from "react-spinners";
-
+import { ToastProvider, useToasts } from 'react-toast-notifications'
+import { Link } from 'react-router-dom'
+import Search from '../../searchbox/search.component'
+import ModalEditRiskAssess from '../modal/modal.edit.risk.assess.component'
+import ModalRiskLevel from '../modal/modal.risk.level.component'
+import ModalDeleteRiskAssess from '../modal/modal.delete.risk.assess.component'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+    faTrashAlt,
     faChartBar,
     faEdit,
     faPlus
 } from '@fortawesome/free-solid-svg-icons'
+
 library.add(
+    faTrashAlt,
     faChartBar,
     faEdit,
     faPlus
 );
 
-export default class RiskAssessmentsList extends Component {
+class RiskAssessmentsList extends Component {
     constructor(props) {
         super(props)
         this.elemRef = React.createRef([])
@@ -28,7 +39,10 @@ export default class RiskAssessmentsList extends Component {
                 loading: false,
             },
             loader_edit: {
-                loading_edit: false
+                loading_edit: false,
+            },
+            loader_del: {
+                loading_del: false,
             },
             riskassessList: [],
             risklevelList: [],
@@ -37,12 +51,13 @@ export default class RiskAssessmentsList extends Component {
             isEditable: false,
             classToggle: 'bg-secondary',
             text: 'Update',
-            editedData: []
+            editedData: [],
+            showHide_delete: false,
+            title: "",
         }
     }
 
-    componentDidMount = (e) => {
-        // this.props.addToast('Saved Successfully', { appearance: 'success', autoDismiss: true, });
+    componentDidMount = () => {
         this.setState({ loader: { loading: true } }) // Show Loader
         this.getRiskAssessmentList()
         this.getRiskLevel()
@@ -54,7 +69,7 @@ export default class RiskAssessmentsList extends Component {
             .then((res) => {
                 if (res.data.status) {
                     this.setState({ riskassessList: res.data.data })
-                    this.setState({ loader: { loading: false } }) // Hide Loader 
+                    this.setState({ loader: { loading: false } }) // Hide Loader
                 } else {
                     console.log('unable to retrieve data -> [Risk Assessments]')
                 }
@@ -84,6 +99,18 @@ export default class RiskAssessmentsList extends Component {
     RA_hideModal = () => {
         this.setState({ RA_isopen: false })
     };
+
+    // Delete Modal Toggle
+    showModal_delete = (riskassess) => {
+        this.setState({ showHide_delete: true })
+        this.setState({
+            id: riskassess._id,
+            title: riskassess.title,
+        })
+    }
+    hideModal_delete = () => {
+        this.setState({ showHide_delete: false })
+    }
 
     // Risk Level Modal
     RL_showModal = () => {
@@ -166,35 +193,38 @@ export default class RiskAssessmentsList extends Component {
                     </tr>
                 }
                 Loader={
-                    <div className="sweet-loading pt-2 ps-1">
-                        <ClipLoader color={this.state.color} loading={this.state.loader.loading} size={24} />
-                    </div>
+                    <tr>
+                        <td className="sweet-loading pt-2 ps-1" style={{ borderBottom: "none", padding: "0px" }}>
+                            <ClipLoader color={this.state.color} loading={this.state.loader.loading} size={24} />
+                        </td>
+                    </tr>
                 }
                 Body={
                     this.state.riskassessList.map((riskassess, key) =>
                     (<tr key={key}>
-                        <th>{key + 1}</th>
+                        <th>{key + 1}.</th>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.title}>{riskassess.title}</td>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.address}>{riskassess.address}</td>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.city}>{riskassess.city}</td>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.region}>{riskassess.region}</td>
                         <td className="text-truncate td-mw-12 text-muted" title={riskassess.description}>{riskassess.description}</td>
                         <td>
-                            <OverlayTrigger
-                                trigger={'click'}
-                                rootClose={true}
-                                key={'top'}
-                                placement={'top'}
-                                overlay={
-                                    <Popover>
-                                        <Popover.Content>
-                                            <a href="#" className="p-2 text-dark" onClick={() => this.getRiskLevel(riskassess._id)} title="Risk Levels"><FontAwesomeIcon icon="chart-bar" /></a>
-                                            <a href="#" className="p-2 text-dark" onClick={() => this.Edit(riskassess._id)} title="Edit"><FontAwesomeIcon icon="edit" /></a>
-                                        </Popover.Content>
-                                    </Popover>
-                                }>
-                                <a href="#" className="text-muted p-2 ellipsis" id={`Popover${key + 1}`}><FontAwesomeIcon icon="ellipsis-h" /></a>
-                            </OverlayTrigger>
+                            <Tippy
+                                offset={[0, -3]}
+                                interactive={true}
+                                animation="scale"
+                                placement="top"
+                                trigger="click"
+                                content={
+                                    <div className="pt-2 pb-2">
+                                        <a href="#" className="text-white p-2" onClick={() => this.showModal_delete(riskassess)} title="Delete"><FontAwesomeIcon icon="trash-alt" /></a>
+                                        <a href="#" className="text-white p-2" onClick={() => this.getRiskLevel(riskassess._id)} title="Risk Levels"><FontAwesomeIcon icon="chart-bar" /></a>
+                                        <a href="#" className="text-white p-2" onClick={() => this.Edit(riskassess._id)} title="Edit"><FontAwesomeIcon icon="edit" /></a>
+                                    </div>
+                                }
+                            >
+                                <a href="#" className="text-muted p-2" id={`Popover${key + 1}`}><FontAwesomeIcon icon="ellipsis-h" /></a>
+                            </Tippy>
                         </td>
                     </tr>)
                     )
@@ -216,8 +246,6 @@ export default class RiskAssessmentsList extends Component {
                 }, (err) => {
                     console.error(err);
                 });
-        } else {
-            console.error('Empty -> [Risk Assessment ID]')
         }
     }
 
@@ -333,7 +361,6 @@ export default class RiskAssessmentsList extends Component {
         )
     }
 
-    // Edit User
     Edit = (id) => {
         axios.get(`/riskAssessment/${id}`)
             .then(res => {
@@ -354,94 +381,189 @@ export default class RiskAssessmentsList extends Component {
             .catch(err => console.error(err))
     }
 
-    updateRiskAssessment = (e) => {
-        e.preventDefault()
-        let id = e.target.id.value
-        if (id) {
-            this.setState({ loader_edit: { loading_edit: true } }) // Show Loader
-            const jsonData = {
-                title: this.state.title,
-                address: this.state.address,
-                city: this.state.city,
-                region: this.state.region,
-                desc: this.state.description
-            }
-            axios.patch(`/riskAssessment/${id}`, jsonData)
-                .then(res => {
-                    if (res.data.status) {
-                        this.setState({ loader_edit: { loading_edit: false } }) // Hide Loader
-                        this.getRiskAssessmentList()
-                        this.RA_hideModal()
-                    } else {
-                        console.error('User not found')
-                    }
-                })
-                .catch(err => console.error(err))
-        } else {
-            console.log('Empty -> [Risk Assessment ID]')
-        }
+    Form = () => {
+        return (
+            <div className="row m-3">
+                <div className="col-md-6">
+                    <label className="text-muted ps-1 fs-13">Title</label>
+                    <input onChange={this.hasChanges.bind(this, 'title')} value={this.state.title} type="text" className="form-control" required />
+                </div>
+                <div className="col-md-6">
+                    <label className="text-muted ps-1 fs-13">Address</label>
+                    <input onChange={this.hasChanges.bind(this, 'address')} value={this.state.address} type="text" className="form-control" required />
+                </div>
+                <div className="col-md-6 mt-4">
+                    <label className="text-muted ps-1 fs-13">City</label>
+                    <input onChange={this.hasChanges.bind(this, 'city')} value={this.state.city} type="text" className="form-control" required />
+                </div>
+                <div className="col-md-6 mt-4">
+                    <label className="text-muted ps-1 fs-13">Region</label>
+                    <input onChange={this.hasChanges.bind(this, 'region')} value={this.state.region} type="text" className="form-control" required />
+                </div>
+                <div className="col-md-12 mt-4">
+                    <label className="text-muted ps-1 fs-13">Description</label>
+                    <textarea onChange={this.hasChanges.bind(this, 'description')} value={this.state.description} type="text" className="form-control" required ></textarea>
+                </div>
+                <input id="_riskid" name="id" value={this.state.id} type="hidden" />
+            </div>
+        )
     }
 
+    // Search Function -> Get Data
+    GetSearchItems = () => {
+        if (!this.elemRef.current) return null;
+        let items = [];
+        if (this.state.riskassessList) {
+            this.state.riskassessList.map(riskassess => {
+                items.push({
+                    _id: riskassess._id,
+                    name: riskassess.title,
+                    title: riskassess.title,
+                    city: riskassess.city,
+                    address: riskassess.address,
+                    region: riskassess.region,
+                    description: riskassess.description,
+                })
+            })
+        }
+        return items;
+    }
+    // Search Function -> On Select
+    OnSelect = (item) => {
+        this.setState({ riskassessList: [item] })
+    };
+    // Search Function -> On Clear
+    OnClear = () => {
+        this.getRiskAssessmentList()
+    };
+
     render() {
+        // Delete Risk Assessment
+        const ConfirmationButton = () => {
+            const { addToast } = useToasts()
+            const Delete = () => {
+                this.setState({ loader_del: { loading_del: true } }) // Show Loader
+                axios.delete(`/riskAssessment/${this.state.id}`)
+                    .then((res) => {
+                        if (res.data.status) {
+                            this.getRiskAssessmentList()
+                            addToast(res.data.msg, {
+                                appearance: 'success',
+                                autoDismiss: true,
+                            })
+                            this.setState({ loader_del: { loading_del: false } }) // Hide Loader
+                            this.hideModal_delete()
+                        }
+                    }, (err) => {
+                        addToast(err.message, {
+                            appearance: 'error',
+                            autoDismiss: true,
+                        })
+                    });
+            }
+            return (<div className="p-2 mb-3 float-center" style={{ textAlign: "center" }}>
+                <button className="btn btn-secondary me-2" onClick={this.hideModal_delete}>Cancel</button>
+                <button className="btn btn-danger" onClick={Delete}>
+                    <ClipLoader color={'#fff'} loading={this.state.loader_del.loading_del} size={10} />
+                    &nbsp; Delete &nbsp;
+                </button>
+            </div>)
+        }
+        // Edit Risk Assessment
+        const FooterButton = () => {
+            const { addToast } = useToasts()
+            const UpdateRiskAssessment = (e) => {
+                e.preventDefault()
+                let id = document.getElementById('_riskid').value
+                if (id) {
+                    this.setState({ loader_edit: { loading_edit: true } }) // Show Loader
+                    const jsonData = {
+                        title: this.state.title,
+                        address: this.state.address,
+                        city: this.state.city,
+                        region: this.state.region,
+                        desc: this.state.description
+                    }
+                    axios.patch(`/riskAssessment/${id}`, jsonData)
+                        .then(res => {
+                            if (res.data.status) {
+                                this.setState({ loader_edit: { loading_edit: false } }) // Hide Loader
+                                this.getRiskAssessmentList()
+                                this.RA_hideModal()
+                                addToast(res.data.msg, {
+                                    appearance: 'success',
+                                    autoDismiss: true,
+                                })
+                            }
+                        })
+                        .catch(err => {
+                            addToast(err.message, {
+                                appearance: 'error',
+                                autoDismiss: true,
+                            })
+                        })
 
-        // this.Toasts()
-        return (<div>
-            {/* Risk Level List */}
-            {this.RiskAssessmentsTable()}
-            {/* Edit Risk Assessment */}
-            <Modal show={this.state.RA_isopen} onHide={this.RA_hideModal} size="lg">
-                <Modal.Header>
-                    <Modal.Title>Edit Risk Assessment</Modal.Title>
-                </Modal.Header>
-                <form onSubmit={this.updateRiskAssessment}>
-                    <Modal.Body>
-                        <div className="row m-3">
-                            <div className="col-md-6">
-                                <label className="text-muted ps-1 fs-13">Title</label>
-                                <input onChange={this.hasChanges.bind(this, 'title')} value={this.state.title} type="text" className="form-control" required />
-                            </div>
-                            <div className="col-md-6">
-                                <label className="text-muted ps-1 fs-13">Address</label>
-                                <input onChange={this.hasChanges.bind(this, 'address')} value={this.state.address} type="text" className="form-control" required />
-                            </div>
-                            <div className="col-md-6 mt-4">
-                                <label className="text-muted ps-1 fs-13">City</label>
-                                <input onChange={this.hasChanges.bind(this, 'city')} value={this.state.city} type="text" className="form-control" required />
-                            </div>
-                            <div className="col-md-6 mt-4">
-                                <label className="text-muted ps-1 fs-13">Region</label>
-                                <input onChange={this.hasChanges.bind(this, 'region')} value={this.state.region} type="text" className="form-control" required />
-                            </div>
-                            <div className="col-md-12 mt-4">
-                                <label className="text-muted ps-1 fs-13">Description</label>
-                                <textarea onChange={this.hasChanges.bind(this, 'description')} value={this.state.description} type="text" className="form-control" required ></textarea>
-                            </div>
-                            <input name="id" value={this.state.id} type="hidden" />
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <button className="btn btn-secondary" onClick={this.RA_hideModal}>Cancel</button>
-                        <button className="btn btn-success" type="submit">
-                            <ClipLoader color={'#fff'} loading={this.state.loader_edit.loading_edit} size={10} />
-                            &nbsp; Save &nbsp;
-                        </button>
-                    </Modal.Footer>
-                </form>
-            </Modal>
-
-            {/* Risk Level */}
-            <Modal show={this.state.RL_isopen} onHide={this.RL_hideModal} size="lg">
-                <Modal.Header>
-                    <Modal.Title>Risk Level</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {this.DisplayRiskLevel()}
-                </Modal.Body>
+                } else {
+                    addToast('Empty -> [Risk Assessment ID]', {
+                        appearance: 'error',
+                        autoDismiss: true,
+                    })
+                }
+            }
+            return (
                 <Modal.Footer>
-                    <button className="btn btn-outline-secondary" onClick={this.RL_hideModal}>Close</button>
+                    <button className="btn btn-secondary" onClick={this.RA_hideModal}>Cancel</button>
+                    <button onClick={UpdateRiskAssessment} className="btn btn-success">
+                        <ClipLoader color={'#fff'} loading={this.state.loader_edit.loading_edit} size={10} />
+                        &nbsp; Save &nbsp;
+                    </button>
                 </Modal.Footer>
-            </Modal>
+            )
+        }
+        return (<div>
+            <ToastProvider>
+                <div className="col-md-12 d-flex pb-3 mt-4 risk-assess">
+                    <div className="col align-self-center w-100">
+                        <Search
+                            items={this.GetSearchItems()}
+                            onselect={this.OnSelect}
+                            onclear={this.OnClear}
+                        // fuseoptions={{ keys: ["name", "title", "address", "city", "region"] }}
+                        />
+                    </div>
+                    <div className="col" style={{ textAlign: "end" }}>
+                        <Link type="button" className="btn_ btn-purple w-50" to="/addriskassessments">Add Risk Assessment</Link>
+                    </div>
+                </div>
+                <div className="shadow-sm p-3 mb-5 bg-body rounded risk-assess">
+                    <h5 className="pb-3">Risk Assessments</h5>
+                    {/* Risk Level List */}
+                    {this.RiskAssessmentsTable()}
+                </div>
 
+                {/* Edit Risk Assessment */}
+                <ModalEditRiskAssess
+                    show={this.state.RA_isopen}
+                    hide={this.RA_hideModal}
+                    form={this.Form()}
+                    footer={<FooterButton />}
+                />
+                {/* Risk Level */}
+                <ModalRiskLevel
+                    show={this.state.RL_isopen}
+                    hide={this.RL_hideModal}
+                    displayrisklevel={this.DisplayRiskLevel()}
+                    onclick={this.RL_hideModal}
+                />
+                {/* Delete Modal */}
+                <ModalDeleteRiskAssess
+                    show={this.state.showHide_delete}
+                    title={this.state.title}
+                    confirmation={<ConfirmationButton />}
+                />
+            </ToastProvider>
         </div >)
     }
 }
+
+export default RiskAssessmentsList;

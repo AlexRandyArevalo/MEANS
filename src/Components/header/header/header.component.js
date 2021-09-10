@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../responsive-style/style.css';
 import '../style/style.css';
@@ -6,9 +6,18 @@ import logo from '../../../Assets/images/user-profile.jpg'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 library.add(faSignOutAlt);
 
 function Header() {
+    const history = useHistory();
+    const [cookies] = useCookies();
+    useEffect(() => {
+        if (!cookies._token || cookies._token === undefined) {
+            history.push('/login')
+        }
+    });
     return <div>
         <nav className="navbar navbar-expand-lg means-header">
             <div className="navbar-collapse">
@@ -20,11 +29,11 @@ function Header() {
             </div>
             <div className="navbar-collapse justify-content-end means-user" style={{ paddingRight: "70px" }}>
                 <ul className="navbar-nav">
-                    <li className="nav-item" style={{ marginRight: "-14px", position:"relative" }}>
-                        <img src={logo} className="rounded-circle" />
+                    <li className="nav-item" style={{ marginRight: "-14px", position: "relative" }}>
+                        <img src={logo} className="rounded-circle" alt="logo" />
                     </li>
                     <li className="nav-item align-self-center">
-                        <span className="nav-link" style={{width:"100%"}}>User here</span>
+                        <span className="nav-link" style={{ width: "100%" }}>{cookies.name}</span>
                     </li>
                     <li className="nav-item d-flex last-child">
                         <span className="vLine"></span>

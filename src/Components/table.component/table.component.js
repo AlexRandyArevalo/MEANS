@@ -3,7 +3,7 @@ import { Component } from "react";
 export default class Table extends Component {
     render() {
         return (<div>
-            <table className="table">
+            <table className={this.props.class}>
                 <thead>
                     {
                         this.props.Header
