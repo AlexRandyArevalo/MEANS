@@ -2,20 +2,31 @@ import logo from './acn-logo.svg';
 import swal from 'sweetalert'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
-
+import axios from 'axios'
 
 function Login() {
-  const [eid, setUser] = useState('alex@accenture.com')
+  const [eid, setUser] = useState('alex11@accenture.com')
   const [pass, setPass] = useState('111')
 
   const history = useHistory();
 
-  const handleValidate = (e) => {
+  const handleValidate = async (e) => {
     e.preventDefault()
-    if (eid == 'alex@accenture.com' && pass == '111')
-      history.push('/')
-    else
-      swal("Wrong Credentials", "Please try again", "error")
+
+
+
+    const request = await axios.post('/login');
+
+    const response = await request?.data;
+
+    console.log(response);
+
+
+    // if (eid == 'alex@accenture.com' && pass == '111')
+    //   history.push('/')
+
+    // else
+    //   swal("Wrong Credentials", "Please try again", "error")
   }
   return (
     <div className="container-fluid Login">

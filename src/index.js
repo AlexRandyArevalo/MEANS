@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios'
 
+import { BrowserRouter} from "react-router-dom";
 import App from './App';
 
+axios.defaults.baseURL = "http://localhost:3001/";
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter> <App /></BrowserRouter> ,
   document.getElementById('root')
 );
 
